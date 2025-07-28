@@ -5,10 +5,10 @@
     
     <entry>
       <title>STM32F407内核和芯片</title>
-      <link href="/2025/07/25/STM32F407%E5%86%85%E6%A0%B8%E5%92%8C%E8%8A%AF%E7%89%87/"/>
-      <url>/2025/07/25/STM32F407%E5%86%85%E6%A0%B8%E5%92%8C%E8%8A%AF%E7%89%87/</url>
+      <link href="/2025/07/25/stm32f407-nei-he-he-xin-pian/"/>
+      <url>/2025/07/25/stm32f407-nei-he-he-xin-pian/</url>
       
-        <content type="html"><![CDATA[<h1 id="STM32F407VET6内核和芯片"><a href="#STM32F407VET6内核和芯片" class="headerlink" title="STM32F407VET6内核和芯片"></a>STM32F407VET6内核和芯片</h1><h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ul><li><strong>AHB:</strong> advanced high-performance bus 高级高性能总线</li><li><strong>APB:</strong> advanced peripheral bus 高级外设总线<br>STM32 芯片内部使用 AHB 连接 CPU 和 SRAM、DMA 等高速模块，而通过桥接器（AHB-to-APB Bridge）连接 APB。<br><img src="/2025/07/25/STM32F407%E5%86%85%E6%A0%B8%E5%92%8C%E8%8A%AF%E7%89%87/STM32F40XXXBlokDiagram.png"><br><img src="/STM32F407%E5%86%85%E6%A0%B8%E5%92%8C%E8%8A%AF%E7%89%87/STM32F40XXXBlokDiagram.png"></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="STM32F407VET6内核和芯片"><a href="#STM32F407VET6内核和芯片" class="headerlink" title="STM32F407VET6内核和芯片"></a>STM32F407VET6内核和芯片</h1><h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ul><li><strong>AHB:</strong> advanced high-performance bus 高级高性能总线</li><li><strong>APB:</strong> advanced peripheral bus 高级外设总线<br>STM32 芯片内部使用 AHB 连接 CPU 和 SRAM、DMA 等高速模块，而通过桥接器（AHB-to-APB Bridge）连接 APB。<br><img src="/2025/07/25/stm32f407-nei-he-he-xin-pian/STM32F40XXXBlokDiagram.png"><br><img src="/STM32F407%E5%86%85%E6%A0%B8%E5%92%8C%E8%8A%AF%E7%89%87/STM32F40XXXBlokDiagram.png"></li></ul>]]></content>
       
       
       
@@ -24,10 +24,10 @@
     
     <entry>
       <title>CubeMX STM32开始一个工程</title>
-      <link href="/2025/07/25/CubeMX-STM32%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B/"/>
-      <url>/2025/07/25/CubeMX-STM32%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B/</url>
+      <link href="/2025/07/25/cubemx-stm32-kai-shi-yi-ge-gong-cheng/"/>
+      <url>/2025/07/25/cubemx-stm32-kai-shi-yi-ge-gong-cheng/</url>
       
-        <content type="html"><![CDATA[<h1 id="CubeMX-STM32开始一个项目"><a href="#CubeMX-STM32开始一个项目" class="headerlink" title="CubeMX STM32开始一个项目"></a>CubeMX STM32开始一个项目</h1><p><img src="/2025/07/25/CubeMX-STM32%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B/%E7%95%8C%E9%9D%A2.jpg" alt="界面"><br><img src="/CubeMX-STM32%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B/%E7%95%8C%E9%9D%A2.jpg" alt="界面"></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="CubeMX-STM32开始一个项目"><a href="#CubeMX-STM32开始一个项目" class="headerlink" title="CubeMX STM32开始一个项目"></a>CubeMX STM32开始一个项目</h1><p><img src="/2025/07/25/cubemx-stm32-kai-shi-yi-ge-gong-cheng/%E7%95%8C%E9%9D%A2.jpg" alt="界面"><br><img src="/CubeMX-STM32%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B/%E7%95%8C%E9%9D%A2.jpg" alt="界面"></p>]]></content>
       
       
       
