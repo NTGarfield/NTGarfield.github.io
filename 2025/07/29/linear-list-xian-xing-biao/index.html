@@ -54,8 +54,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -418,6 +417,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -428,7 +430,7 @@
 <li>函数重载（Overload）和运算符重载（Operator Overload）。</li>
 <li>函数名相同，参数不同，编译期决定调用哪个版本。</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;int&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">double</span> x)</span> </span>&#123; cout &lt;&lt; <span class="string">&quot;double&quot;</span> &lt;&lt; endl; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void print(int x) &#123; cout &lt;&lt; &quot;int&quot; &lt;&lt; endl; &#125;</span><br><span class="line">void print(double x) &#123; cout &lt;&lt; &quot;double&quot; &lt;&lt; endl; &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="动态多态-运行时"><a href="#动态多态-运行时" class="headerlink" title="动态多态(运行时)"></a>动态多态(运行时)</h3><p>虚函数（virtual function）+ 基类指针或引用调用派生类对象</p>
 <ul>
 <li>依赖<strong>继承和虚函数</strong>机制；</li>
@@ -737,6 +739,9 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
