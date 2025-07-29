@@ -53,8 +53,14 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
+    <!-- Prism.js 样式 -->
+     <link rel="stylesheet" href="/libs/prism/prism.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
+<!--20250730-->
+
+<!--20250730-->
 
 <body>
     <header class="navbar-fixed">
@@ -374,11 +380,6 @@
 
             <div class="post-info">
                 
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-07-25
-                </div>
-                
 
                 
                 <div class="post-date info-break-policy">
@@ -411,11 +412,12 @@
         </div>
         <hr class="clearfix">
 
-        
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!--
+         是否加载使用自带的 prismjs.
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
+         -->
 
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         <div class="card-content article-card-content">
@@ -688,11 +690,6 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
-
-
 <!-- 代码语言 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
@@ -706,32 +703,6 @@
 <!-- 代码块收缩 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
 
 
     </div>
@@ -893,7 +864,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">722</span>
+                        class="white-color">733</span>
             
             
             
@@ -945,12 +916,12 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
 </div>
     </div>
+
+    <!-- Prism.js 脚本 -->
+<script src="/libs/prism/prism.js"></script>
+<script>Prism.highlightAll();</script>
 </footer>
 
 <div class="progress-bar"></div>
@@ -1104,6 +1075,15 @@ $(function () {
     
     
     
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
 
     <!-- 雪花特效 -->
     
@@ -1136,8 +1116,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
@@ -1150,6 +1128,10 @@ $(function () {
     
     
 
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
     
 
     

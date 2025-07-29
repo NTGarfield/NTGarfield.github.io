@@ -54,8 +54,14 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
+    <!-- Prism.js 样式 -->
+     <link rel="stylesheet" href="/libs/prism/prism.css">
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
+<!--20250730-->
+
+<!--20250730-->
 
 <body>
     <header class="navbar-fixed">
@@ -379,11 +385,6 @@
 
             <div class="post-info">
                 
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-07-29
-                </div>
-                
 
                 
                 <div class="post-date info-break-policy">
@@ -395,7 +396,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    571
+                    584
                 </div>
                 
 
@@ -416,11 +417,12 @@
         </div>
         <hr class="clearfix">
 
-        
-        <!-- 是否加载使用自带的 prismjs. -->
+        <!--
+         是否加载使用自带的 prismjs.
         <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
+         -->
 
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
         
 
         <div class="card-content article-card-content">
@@ -430,16 +432,44 @@
 <li>函数重载（Overload）和运算符重载（Operator Overload）。</li>
 <li>函数名相同，参数不同，编译期决定调用哪个版本。</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">void print(int x) &#123; cout &lt;&lt; &quot;int&quot; &lt;&lt; endl; &#125;</span><br><span class="line">void print(double x) &#123; cout &lt;&lt; &quot;double&quot; &lt;&lt; endl; &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"int"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">double</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> cout <span class="token operator">&lt;&lt;</span> <span class="token string">"double"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-haml" data-language="haml"><code class="language-haml"><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>jsaljhfsdajf<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="动态多态-运行时"><a href="#动态多态-运行时" class="headerlink" title="动态多态(运行时)"></a>动态多态(运行时)</h3><p>虚函数（virtual function）+ 基类指针或引用调用派生类对象</p>
 <ul>
 <li>依赖<strong>继承和虚函数</strong>机制；</li>
 <li>通过<strong>基类指针</strong>或<strong>引用</strong>调用派生类的重写方法（override）；</li>
 <li>决定函数调用的是运行时类型，而不是编译时类型。</li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">speak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Animal speaks&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Animal &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Dog barks&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">makeSound</span><span class="params">(Animal* a)</span> </span>&#123;</span><br><span class="line">    a-&gt;<span class="built_in">speak</span>();  <span class="comment">// 调用的是实际对象的 speak 方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Animal a;</span><br><span class="line">    Dog d;</span><br><span class="line">    <span class="built_in">makeSound</span>(&amp;a);  <span class="comment">// 输出: Animal speaks</span></span><br><span class="line">    <span class="built_in">makeSound</span>(&amp;d);  <span class="comment">// 输出: Dog barks（多态效果）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+using namespace std;
+
+class Animal &#123;
+public:
+    virtual void speak() &#123;
+        cout &lt;&lt; &quot;Animal speaks&quot; &lt;&lt; endl;
+    &#125;
+&#125;;
+
+class Dog : public Animal &#123;
+public:
+    void speak() override &#123;
+        cout &lt;&lt; &quot;Dog barks&quot; &lt;&lt; endl;
+    &#125;
+&#125;;
+
+void makeSound(Animal* a) &#123;
+    a-&gt;speak();  &#x2F;&#x2F; 调用的是实际对象的 speak 方法
+&#125;
+
+int main() &#123;
+    Animal a;
+    Dog d;
+    makeSound(&amp;a);  &#x2F;&#x2F; 输出: Animal speaks
+    makeSound(&amp;d);  &#x2F;&#x2F; 输出: Dog barks（多态效果）
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="CPP抽象类"><a href="#CPP抽象类" class="headerlink" title="CPP抽象类"></a>CPP抽象类</h2><p><strong>虚函数:</strong> 虚函数是允许通过基类指针或引用调用派生类重写函数的机制<br><strong>纯虚函数:</strong> 抽象类包含为实现代码的成员函数，pure virtual function<br><strong>抽象类不可实例化</strong><br>纯虚函数用数字 0 作为初始值来说明</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">myPureVirtualFunction</span><span class="params">(<span class="type">int</span> x)</span></span>=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">virtual int myPureVirtualFunction(int x)&#x3D;0;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Linear-List-Order-List-线性表-有序表"><a href="#Linear-List-Order-List-线性表-有序表" class="headerlink" title="Linear List(Order List) 线性表(有序表)"></a>Linear List(Order List) 线性表(有序表)</h2><ul>
 <li>实例是元素的一个有序集合</li>
@@ -457,7 +487,15 @@
 <li>从左至右顺序输出线性表元素</li>
 </ul>
 <h2 id="抽象数据类型-ADT"><a href="#抽象数据类型-ADT" class="headerlink" title="抽象数据类型(ADT)"></a>抽象数据类型(ADT)</h2><h3 id="非形式语言说明"><a href="#非形式语言说明" class="headerlink" title="非形式语言说明"></a>非形式语言说明</h3><p><img src="/2025/07/29/linear-list-xian-xing-biao/linearlist.png" title="线性表的抽象数据类型说明"><br><img src="/Linear-List-%E7%BA%BF%E6%80%A7%E8%A1%A8/linearlist.png" title="线性表的抽象数据类型非形式语言说明"></p>
-<h3 id="抽象类说明"><a href="#抽象类说明" class="headerlink" title="抽象类说明"></a>抽象类说明</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt; <span class="keyword">class</span> <span class="title class_">linearList</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">linearList</span>()&#123;&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>; <span class="comment">//返回true，当且仅当线性表为空</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> T&amp; <span class="title">get</span><span class="params">(<span class="type">int</span> theIndex)</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">int</span> <span class="title">indexOf</span><span class="params">(<span class="type">const</span> T&amp; theElement)</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="抽象类说明"><a href="#抽象类说明" class="headerlink" title="抽象类说明"></a>抽象类说明</h3><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">template&lt;class T&gt; class linearList
+&#123;
+    public:
+    virtual ~linearList()&#123;&#125;;
+    virtual bool empty() const &#x3D; 0; &#x2F;&#x2F;返回true，当且仅当线性表为空
+    virtual int size() const &#x3D; 0;
+    virtual T&amp; get(int theIndex) const &#x3D; 0;
+    virtual int indexOf(const T&amp; theElement) const &#x3D; 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -739,11 +777,6 @@
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
-
-
 <!-- 代码语言 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
@@ -757,32 +790,6 @@
 <!-- 代码块收缩 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
 
 
     </div>
@@ -944,7 +951,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">722</span>
+                        class="white-color">733</span>
             
             
             
@@ -996,12 +1003,12 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
-
 </div>
     </div>
+
+    <!-- Prism.js 脚本 -->
+<script src="/libs/prism/prism.js"></script>
+<script>Prism.highlightAll();</script>
 </footer>
 
 <div class="progress-bar"></div>
@@ -1155,6 +1162,15 @@ $(function () {
     
     
     
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
 
     <!-- 雪花特效 -->
     
@@ -1187,8 +1203,6 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
-    
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
@@ -1201,6 +1215,10 @@ $(function () {
     
     
 
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
     
 
     
