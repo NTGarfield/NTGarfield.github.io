@@ -371,8 +371,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                                <span class="chip bg-color">数据结构</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8CCPP/">
+                                <span class="chip bg-color">数据结构，CPP</span>
                             </a>
                         
                     </div>
@@ -389,14 +389,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-29
+                    2025-07-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    559
+                    667
                 </div>
                 
 
@@ -467,9 +467,9 @@
     <span class="token function">makeSound</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出: Animal speaks</span>
     <span class="token function">makeSound</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 输出: Dog barks（多态效果）</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="CPP抽象类"><a href="#CPP抽象类" class="headerlink" title="CPP抽象类"></a>CPP抽象类</h2><p><strong>虚函数:</strong> 虚函数是允许通过基类指针或引用调用派生类重写函数的机制<br><strong>纯虚函数:</strong> 抽象类包含为实现代码的成员函数，pure virtual function<br><strong>抽象类不可实例化</strong><br>纯虚函数用数字 0 作为初始值来说明</p>
+<h2 id="CPP抽象类"><a href="#CPP抽象类" class="headerlink" title="CPP抽象类"></a>CPP抽象类</h2><p><strong>虚函数:</strong> (Virtual Function)虚函数是允许通过基类指针或引用调用派生类重写函数的机制<br><strong>纯虚函数:</strong> (Pure Virtual Function)特殊的虚函数，将<strong>类声明为抽象类</strong>，并且纯虚函数必须由派生类来实现，即包含纯虚函数的类称为<strong>抽象类</strong><br><strong>抽象类不可实例化</strong><br>纯虚函数用数字 0 作为初始值来说明</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">myPureVirtualFunction</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<p>-抽象类的派生类只有实现了基类的所有<strong>纯虚函数</strong>才是具体类，否则依然是抽象类，不能实例化</p>
 <h2 id="Linear-List-Order-List-线性表-有序表"><a href="#Linear-List-Order-List-线性表-有序表" class="headerlink" title="Linear List(Order List) 线性表(有序表)"></a>Linear List(Order List) 线性表(有序表)</h2><ul>
 <li>实例是元素的一个有序集合</li>
 <li>元素之间有先后关系</li>
@@ -489,12 +489,15 @@
 <h3 id="抽象类说明"><a href="#抽象类说明" class="headerlink" title="抽象类说明"></a>抽象类说明</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token operator">></span> <span class="token keyword">class</span> <span class="token class-name">linearList</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">linearList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">virtual</span> <span class="token keyword">bool</span> <span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//返回true，当且仅当线性表为空</span>
-    <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">virtual</span> T<span class="token operator">&amp;</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> theIndex<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> theElement<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">linearList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>   <span class="token comment">//虚析构函数</span>
+        <span class="token keyword">virtual</span> <span class="token keyword">bool</span> <span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//返回true，当且仅当线性表为空</span>
+        <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">virtual</span> T<span class="token operator">&amp;</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> theIndex<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token keyword">const</span> T<span class="token operator">&amp;</span> theElement<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">erase</span><span class="token punctuation">(</span><span class="token keyword">int</span> theIndex<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token keyword">int</span> thrIndex<span class="token punctuation">,</span> <span class="token keyword">const</span> T<span class="token operator">&amp;</span> theElement<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">output</span><span class="token punctuation">(</span>ostream<span class="token operator">&amp;</span> out<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token comment">//把线性表插入输出流out</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -559,8 +562,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                                    <span class="chip bg-color">数据结构</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8CCPP/">
+                                    <span class="chip bg-color">数据结构，CPP</span>
                                 </a>
                             
                         </div>
@@ -675,8 +678,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8CCPP/">
+                        <span class="chip bg-color">数据结构，CPP</span>
                     </a>
                     
                 </div>
@@ -950,7 +953,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">708</span>
+                        class="white-color">816</span>
             
             
             
