@@ -4,22 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CPP(一)——vector, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
-    <meta name="description" content="vector 容器CPP中vector是一种序列容器
-
-基于数组的数据结构
-大小可根据需要动态增长和缩小
-存储内存连续
-可存储数据类型不限
-
-应用
-使用时要包含头文件
-
-#include &amp;lt;vector&gt;
-
-创建vector
-
-">
+    <meta name="keywords" content="CPP(一), 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="vector">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -31,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CPP(一)——vector | NTGafield</title>
+    <title>CPP(一) | NTGafield</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -374,12 +360,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CPP(一)——vector</h1>
+                    <h1 class="description center-align post-title">CPP(一)</h1>
                 </div>
             </div>
         </div>
@@ -419,10 +405,6 @@
                                 CPP
                             </a>
                         
-                            <a href="/categories/CPP/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                数据结构
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -434,14 +416,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-08-06
+                    2025-08-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    67
+                    269
                 </div>
                 
 
@@ -486,7 +468,48 @@
 <ul>
 <li>创建vector</li>
 </ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> myVector<span class="token punctuation">;</span>  <span class="token comment">//存储int的空vector</span>
+std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//长度为5，默认值是0</span>
+std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//默认值 10</span>
+std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> myVector <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>  <span class="token comment">//初始化</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>添加元素</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">myVector<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//添加7到末尾</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>访问元素<br>两种方法</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> x <span class="token operator">=</span> myVector<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> y <span class="token operator">=</span> myVector<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>元素个数</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> size <span class="token operator">=</span> myVector<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>删除元素</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">myVector<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>myVector<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//删除第三个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>迭代访问</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*迭代访问器*/</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> myVector<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> myVector<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>it <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/*范围循环*/</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> element <span class="token operator">:</span> myVector<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> element <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="迭代器（iterator）"><a href="#迭代器（iterator）" class="headerlink" title="迭代器（iterator）"></a>迭代器（iterator）</h1><p><strong>iterator</strong>是CPP STL（标准模板库）中核心概念之一</p>
+<blockquote>
+<p>itreator 是一个“抽象指针”，用于顺序访问容器中的元素</p>
+</blockquote>
+<blockquote>
+<p>可以用统一的方式操作不同的容器</p>
+</blockquote>
+
                 
             </div>
             <hr/>
@@ -639,15 +662,15 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="CPP(一)——vector">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="CPP(一)">
                         
-                        <span class="card-title">CPP(一)——vector</span>
+                        <span class="card-title">CPP(一)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            vector
                         
                     </div>
                     <div class="publish-info">
@@ -660,10 +683,6 @@
                             
                             <a href="/categories/CPP/" class="post-category">
                                     CPP
-                                </a>
-                            
-                            <a href="/categories/CPP/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                    数据结构
                                 </a>
                             
                             
@@ -957,7 +976,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">883</span>
+                        class="white-color">1.1k</span>
             
             
             
