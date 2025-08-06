@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>CPP(一)——vector</title>
+      <link href="/2025/08/06/cpp-yi/"/>
+      <url>/2025/08/06/cpp-yi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="vector-容器"><a href="#vector-容器" class="headerlink" title="vector 容器"></a>vector 容器</h1><p>CPP中<strong>vector</strong>是一种序列容器</p><ul><li>基于数组的数据结构</li><li>大小可根据需要动态增长和缩小</li><li>存储内存连续</li><li>可存储数据类型不限</li></ul><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ul><li>使用时要包含头文件</li></ul><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>创建vector</li></ul><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> CPP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CPP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linear List(线性表)</title>
       <link href="/2025/07/29/linear-list-xian-xing-biao/"/>
       <url>/2025/07/29/linear-list-xian-xing-biao/</url>
