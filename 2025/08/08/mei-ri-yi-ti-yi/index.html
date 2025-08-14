@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="每日一题(一), 嵌入式/C/CPP/C#/WPF/MVVM/算法">
-    <meta name="description" content="二分查找">
+    <meta name="description" content="二分查找 || IEEE 754">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -54,6 +54,7 @@
 
     <!-- Prism.js 样式 -->
      <link rel="stylesheet" href="/libs/prism/prism.css">
+
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
@@ -439,14 +440,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    8 分
                 </div>
                 
 
@@ -664,9 +665,96 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="优秀题解"><a href="#优秀题解" class="headerlink" title="优秀题解"></a>优秀题解</h3><h4 id="袖珍计算器算法"><a href="#袖珍计算器算法" class="headerlink" title="袖珍计算器算法"></a>袖珍计算器算法</h4><p>使用自然对对数 e 进行换底<br>$$\sqrt{x}&#x3D;e^{\frac{1}{2}\ln x}$$</p>
+<blockquote>
+<p><strong>注意</strong>⚠️：通常计算机存储浮点数采用IEEE 754，且无法存储精确的浮点数值，指数函数和对数函数返回值均为浮点数，因此运算过程会存在误差。<br>由于向下取整，因此数值可能偏小<br>在得到结果的整数部分 ans 后，我们应当找出 ans 与 ans+1 中哪一个是真正的答案</p>
+</blockquote>
+<h5 id="CPP-2"><a href="#CPP-2" class="headerlink" title="CPP"></a>CPP</h5><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">mySqrt</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token function">exp</span><span class="token punctuation">(</span><span class="token number">0.5</span> <span class="token operator">*</span> <span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//转换成整数为向下取整</span>
+      <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">(</span>ans <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>ans <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> x <span class="token operator">?</span> ans <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">:</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h5><ul>
+<li>时间复杂度：O(1)，由于内置的 exp 函数与 log 函数一般都很快，我们在这里将其复杂度视为 O(1)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>见上述</p>
+<h5 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h5><ul>
+<li>时间复杂度：O(logx)，即为二分查找需要的次数</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h4 id="牛顿迭代"><a href="#牛顿迭代" class="headerlink" title="牛顿迭代"></a>牛顿迭代</h4><p>牛顿迭代法可以快速<strong>求解函数过零点</strong><br>原理：泰勒级数<br>设函数为：<br>$$y&#x3D;f(x)&#x3D;x^2-C$$<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/20250814212008035.png?raw=true"><br><strong>1.</strong> 选择\(x_0&#x3D;C&#x2F;2\)作为初始值<br><strong>2.</strong> 每一步迭代中，通过当前的交点\((x_i,x_i^2-C)\)，做一条斜率为 \(f^{‘}(x_i)&#x3D;2x_i\)的直线：</p>
+
+$$
+  \begin{aligned}
+    y_i &=2x_i(x-x_i)+x_i^2-C\\
+    &=2x_ix-(x_i^2+C)
+  \end{aligned}
+$$
+
+<p><strong>3.</strong> \(y_i\)与横轴的交点为\(x_{i+1}\)：<br>   $$x_{i+1}&#x3D;\frac{1}{2}(x_i+\frac{C}{x_i})$$</p>
+<p>当\(x_k\)的值与真实的零点\(\sqrt C\)足够接近，既可作为答案</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">mySqrt</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> x <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+        <span class="token keyword">double</span> x0 <span class="token operator">=</span> x <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">double</span> xi <span class="token operator">=</span> <span class="token number">0.5</span> <span class="token operator">*</span> <span class="token punctuation">(</span>x0 <span class="token operator">+</span> x <span class="token operator">/</span> x0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fabs</span><span class="token punctuation">(</span>x0 <span class="token operator">-</span> xi<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1e-7</span><span class="token punctuation">)</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            x0 <span class="token operator">=</span> xi<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> <span class="token keyword">int</span><span class="token punctuation">(</span>x0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h1><h2 id="防止大数溢出"><a href="#防止大数溢出" class="headerlink" title="防止大数溢出"></a>防止大数溢出</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> middle <span class="token operator">=</span> <span class="token punctuation">(</span>left <span class="token operator">+</span> right<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><code>int</code>一般是32位有符号整数，取值范围大约为 \(-2^{32} \sim 2^{32}-1\)<br>如果 left 和 right 太大了，那么 (left + right) 会溢出，产生错误<br>因此做一下处理</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> middle <span class="token operator">=</span> left <span class="token operator">+</span> <span class="token punctuation">(</span>right <span class="token operator">-</span> left<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h2><p>是浮点数标准：定义了浮点数在计算机内的存储格式 、运算规则、舍入方式以及特殊值表示<br>广泛用于硬件浮点单元（FPU）、编程语言（如 C&#x2F;C++、Java、Python）中</p>
+<p><strong>浮点数 &#x3D; 符号位（sign） + 阶码（exponent）+ 尾数&#x2F;有效数字（mantissa&#x2F;fraction）</strong></p>
+<h3 id="常见格式"><a href="#常见格式" class="headerlink" title="常见格式"></a>常见格式</h3><table>
+<thead>
+<tr>
+<th align="center">格式</th>
+<th align="center">总位数</th>
+<th align="center">符号位</th>
+<th align="center">指数位</th>
+<th align="center">尾数位</th>
+<th align="center">范围</th>
+<th align="center">精度</th>
+<th align="center">示意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">float</td>
+<td align="center">32</td>
+<td align="center">1</td>
+<td align="center">8</td>
+<td align="center">23</td>
+<td align="center">\(\sim\pm 3.4^{38}\)</td>
+<td align="center">7位有效</td>
+<td align="center"><img src="https://github.com/NTGarfield/MyPic/blob/img/text/float.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">64</td>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">52</td>
+<td align="center">\(\sim\pm 1.8^{308}\)</td>
+<td align="center">15位有效</td>
+<td align="center"><img src="https://github.com/NTGarfield/MyPic/blob/img/text/double.png?raw=true"></td>
+</tr>
+</tbody></table>
+<p>以float \(0.15625_{10}\)为例，转换为二进制\(0.00101_2\)，小数点左边只能有一个1，科学计数法为：<br>$$0.00101_2&#x3D;1.01_2*2^{-3}$$<br>小数部分：\(.01_2\)<br>指数部分：-3<br>最终在内存中的存储结果就是如下图：<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/0.15625.png?raw=true"><br>指数位（exponent）：-3 + 偏移量（bias）,在单精度浮点数中偏移量是127，因此127+(-3)&#x3D;124，所以偏移指数是124</p>
+
                 
             </div>
             <hr/>
@@ -843,7 +931,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            二分查找
+                            二分查找 || IEEE 754
                         
                     </div>
                     <div class="publish-info">
@@ -1168,7 +1256,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">2.5k</span>
+                        class="white-color">3.1k</span>
             
             
             
