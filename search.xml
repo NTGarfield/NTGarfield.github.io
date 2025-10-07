@@ -4,11 +4,24 @@
   
     
     <entry>
+      <title>CMake</title>
+      <link href="/2025/10/06/cmake/"/>
+      <url>/2025/10/06/cmake/</url>
+      
+        <content type="html"><![CDATA[<h2 id="编译过程-tool-chain"><a href="#编译过程-tool-chain" class="headerlink" title="编译过程 tool chain"></a>编译过程 tool chain</h2><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg?raw=true"></p><h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>Makefile 是用于管理项目构建过程的工具，广泛用于 C/C++ 等语言的编译。它通过定义规则和指令，自动化编译、链接等步骤，大大简化了开发者的工作。<br>Makefile 是 make 命令所读取的<strong>配置文件</strong>，包含了构建项目的规则。其主要作用是检查项目文件的依赖关系，自动执行必要的命令，从而更新目标文件。一般来说，Makefile 主要包括以下三部分内容：</p><ul><li>目标（Target）：需要生成的文件，例如可执行文件。</li><li>依赖（Dependencies）：生成目标所依赖的文件或目标。</li><li>命令（Commands）：构建目标时需要执行的命令。<blockquote><p>makefile 依赖编译平台，且手动编写工作量较大，解决依赖关系易出错</p></blockquote></li></ul><h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h2><p>CMake是一个项目构建工具，开发者可指定整个工程的编译流程，CMake会根据编译平台自动生成本地化的Makefile和工程文件，最后用户只需make编译即可。<br>具体流程：<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/CMake%E6%B5%81%E7%A8%8B.jpg?raw=true"></p><ul><li>跨平台</li><li>可管理大型项目</li><li>简化编译构建过程&amp;编译过程</li><li>可扩展：通过编写cmake特定功能的模块，扩充cmake功能</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>硬件基础（一）</title>
       <link href="/2025/10/05/ying-jian-ji-chu-yi/"/>
       <url>/2025/10/05/ying-jian-ji-chu-yi/</url>
       
-        <content type="html"><![CDATA[<h2 id="电容"><a href="#电容" class="headerlink" title="电容"></a>电容</h2><ul><li>放电特性</li><li>储能特性</li></ul><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul><li>储能特性：可实现关电延迟 </li><li>稳定电压（滤波）：电源非理想电源，比如电路发生变化，并联电路开关突然闭合，会造成电压跌落，导致死机复位等问题。 并联一个电容，其储能功能可以补偿电流，起到稳压。图中，C5是稳压电容。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%94%B5%E5%AE%B9%E7%A8%B3%E5%8E%8B.png?raw=true"></li></ul><h3 id="容抗计算公式"><a href="#容抗计算公式" class="headerlink" title="容抗计算公式"></a>容抗计算公式</h3><p>$$R_c=\frac{1}{2\pi fc}$$<br>频率：加在电容上的电压频率<br>电容在频率越高时，阻抗越小，频率越低时，阻抗越大<br><strong>隔直流，通交流</strong></p><h3 id="低通滤波电路"><a href="#低通滤波电路" class="headerlink" title="低通滤波电路"></a>低通滤波电路</h3><p>低通滤波电路可以让低频信号通过，衰减高频的信号。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E7%94%B5%E8%B7%AF.png?raw=true"><br>低通滤波电路截止频率：\(f_t=\frac{1}{2\pi RC}\)</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="电容"><a href="#电容" class="headerlink" title="电容"></a>电容</h2><ul><li>放电特性</li><li>储能特性</li><li>两端的电压不能突变（为充满电时）</li></ul><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul><li>储能特性：可实现关电延迟 </li><li>稳定电压（滤波）：电源非理想电源，比如电路发生变化，并联电路开关突然闭合，会造成电压跌落，导致死机复位等问题。 并联一个电容，其储能功能可以补偿电流，起到稳压。图中，C5是稳压电容。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%94%B5%E5%AE%B9%E7%A8%B3%E5%8E%8B.png?raw=true"></li></ul><h3 id="容抗计算公式"><a href="#容抗计算公式" class="headerlink" title="容抗计算公式"></a>容抗计算公式</h3><p>$$R_c=\frac{1}{2\pi fc}$$<br>频率：加在电容上的电压频率<br>电容在频率越高时，阻抗越小，频率越低时，阻抗越大<br><strong>隔直流，通交流</strong></p><h3 id="低通滤波电路"><a href="#低通滤波电路" class="headerlink" title="低通滤波电路"></a>低通滤波电路</h3><p>低通滤波电路可以让低频信号通过，衰减高频的信号。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E7%94%B5%E8%B7%AF.png?raw=true"><br>低通滤波电路截止频率：<br>$$f_t=\frac{1}{2\pi RC}\$$<br>在实际电路中，输入电压通常有高频噪声，可利用低通滤波电路滤掉。</p><h3 id="高通滤波电路"><a href="#高通滤波电路" class="headerlink" title="高通滤波电路"></a>高通滤波电路</h3><p>让高频信号通过，衰减低频信号（工频干扰，比如未共地）<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E7%94%B5%E8%B7%AF.png?raw=true"></p><blockquote><p>高频or低频是相对于截止频率而言的</p></blockquote><h2 id="电感"><a href="#电感" class="headerlink" title="电感"></a>电感</h2><p>任何一个导线都可以看作一个很小的电阻+很小的电感<br>应用：电机、喇叭</p><ul><li>流过电感的电流不能突变</li><li>常见电路中，电感只能改变电路中的电流变化速度，但不能改变电流最大值</li></ul>]]></content>
       
       
       <categories>
