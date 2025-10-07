@@ -11,6 +11,22 @@
         <content type="html"><![CDATA[<h2 id="编译过程-tool-chain"><a href="#编译过程-tool-chain" class="headerlink" title="编译过程 tool chain"></a>编译过程 tool chain</h2><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg?raw=true"></p><h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>Makefile 是用于管理项目构建过程的工具，广泛用于 C/C++ 等语言的编译。它通过定义规则和指令，自动化编译、链接等步骤，大大简化了开发者的工作。<br>Makefile 是 make 命令所读取的<strong>配置文件</strong>，包含了构建项目的规则。其主要作用是检查项目文件的依赖关系，自动执行必要的命令，从而更新目标文件。一般来说，Makefile 主要包括以下三部分内容：</p><ul><li>目标（Target）：需要生成的文件，例如可执行文件。</li><li>依赖（Dependencies）：生成目标所依赖的文件或目标。</li><li>命令（Commands）：构建目标时需要执行的命令。<blockquote><p>makefile 依赖编译平台，且手动编写工作量较大，解决依赖关系易出错</p></blockquote></li></ul><h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h2><p>CMake是一个项目构建工具，开发者可指定整个工程的编译流程，CMake会根据编译平台自动生成本地化的Makefile和工程文件，最后用户只需make编译即可。<br>具体流程：<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/CMake%E6%B5%81%E7%A8%8B.jpg?raw=true"></p><ul><li>跨平台</li><li>可管理大型项目</li><li>简化编译构建过程&amp;编译过程</li><li>可扩展：通过编写cmake特定功能的模块，扩充cmake功能</li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> C </category>
+          
+          <category> CPP </category>
+          
+          <category> 项目管理 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CMake </tag>
+            
+        </tags>
       
     </entry>
     
