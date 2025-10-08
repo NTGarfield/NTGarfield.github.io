@@ -472,21 +472,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-08
+                    2025-10-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    656
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    5 分
                 </div>
                 
 
@@ -523,7 +523,22 @@
 <li>效率高</li>
 </ul>
 <h2 id="FreeRTOS相关概念"><a href="#FreeRTOS相关概念" class="headerlink" title="FreeRTOS相关概念"></a>FreeRTOS相关概念</h2><h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/FreeRTOS%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD.jpg?raw=true"></p>
-<h3 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h3>
+<h3 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h3><p>同等优先级任务轮流享有相同的CPU时间(可设置)，叫做时间片，在FreeRTOS中，一个时间片等于SysTick中断周期。</p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>队尾放入数据，对头挤出。先进先出，称为FIFO</p>
+<h3 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h3><p>在裸机系统中，系统的主体就是 main 函数里面顺序执行的无限循环，这个无限循环里面 CPU 按照顺序完成各种事情。在多任务系统中，根据功能的不同，把整个系统分割成一个个<strong>独立的且无法返回</strong>的函数，这个函数我们称为任务。系统中的每一任务都有多种运行状态。系统初始化完成后，创建的任务就可以在系统中竞争一定的资源，由内核进行调度。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BB%BB%E5%8A%A1%E7%9A%84%E7%8A%B6%E6%80%81.jpg?raw=true"><br>任务可以存在于以下状态中：</p>
+<ul>
+<li>运行态<br>当任务实际执行时，它被称为处于运行状态。任务当前正在使用处理器。 如果运行 RTOS 的处理器只有一个内核， 那么在任何给定时间内都只能有一个任务处于运行状态。</li>
+<li>就绪态<br>准备就绪任务指那些能够执行（它们不处于阻塞或挂起状态）， 但目前没有执行的任务， 因为同等或更高优先级的不同任务已经处于运行状态。</li>
+<li>阻塞态<br>如果任务当前正在等待时间或外部事件，则该任务被认为处于阻塞状态。 例如，如果一个任务调用vTaskDelay()，它将被阻塞（被置于阻塞状态）， 直到延迟结束——一个时间事件。 任务也可以通过阻塞来等待队列、信号量、事件组、通知或信号量事件。处于阻塞状态的任务通常有一个“超时”期， 超时后任务将被超时，并被解除阻塞， 即使该任务所等待的事件没有发生。“阻塞”状态下的任务不使用任何处理时间，不能被选择进入运行状态。</li>
+<li>挂起态<br>与“阻塞”状态下的任务一样， “挂起”状态下的任务不能被选择进入运行状态，但处于挂起状态的任务没有超时。相反，任务只有在分别通过 <strong>vTaskSuspend()</strong> 和 <strong>xTaskResume() API</strong> 调用明确命令时 才会进入或退出挂起状态。</li>
+</ul>
+<h3 id="调度方式"><a href="#调度方式" class="headerlink" title="调度方式"></a>调度方式</h3><p>常规单核处理器一次只能执行一个任务，但多任务操作系统可以快速切换任务， 使所有任务看起来像是同时在执行。<br>切换的过程由任务调度器实现，任务调度器就是使用相关的调度算法来决定当前需要执行的哪个任务。FreeRTOS有三种调度方式：<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E5%8D%95%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C.jpg?raw=true"></p>
+<ul>
+<li>抢占式调度 ：主要是针对优先级不同的任务，每一个任务都有一个任务优先级，优先级高的任务可以抢占低优先级的任务的CPU使用权。</li>
+<li>时间片调度 ：主要针对相同优先级的任务，当多个任务的优先级相同时，任务调度器会在每个时钟节拍到来的时候切换任务。</li>
+<li>协程式调度 ：其实就是轮询，当前执行任务将会一直运行，同时高优先级的任务不会抢占低优先级任务。FreeRTOS现在虽然还在支持，但官方已经明确表示不再更新协程式调度。</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -989,7 +1004,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.5k</span>
+                        class="white-color">5.4k</span>
             
             
             
