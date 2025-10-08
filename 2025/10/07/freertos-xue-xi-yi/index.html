@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="FreeRTOS学习（一）, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="FreeRTOS初识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | NTGafield</title>
+    <title>FreeRTOS学习（一） | NTGafield</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -412,12 +412,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">FreeRTOS学习（一）</h1>
                 </div>
             </div>
         </div>
@@ -439,12 +439,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/FreeRTOS/">
+                                <span class="chip bg-color">FreeRTOS</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CPP/" class="post-category">
+                                CPP
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -455,21 +468,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-23
+                    2025-10-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    656
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -493,20 +506,20 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+                <h2 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>real-time Operate System，实时操作系统，简称RTOS。RTOS 是一种体积小巧、确定性强的计算机操作系统。 RTOS 通常用于需要在<strong>严格时间限制内</strong>对外部事件做出反应的嵌入式系统，如医疗设备和汽车电子控制单元 (ECU)。 通常，此类嵌入式系统中只有一两项功能需要确定性时序，即使嵌入式系统不需要严格的实时反应，使用 RTOS 仍能提供诸多优势。RTOS 通常比通用操作系统体积更小、重量更轻，因此 RTOS 非常适用于 内存、计算和功率受限的设备。</p>
+<h3 id="裸机vsRTOS"><a href="#裸机vsRTOS" class="headerlink" title="裸机vsRTOS"></a>裸机vsRTOS</h3><h4 id="裸机"><a href="#裸机" class="headerlink" title="裸机"></a>裸机</h4><p>裸机系统中，程序的设计模式可以分为：轮询、前后台、定时器驱动、基于状态机。前面三种方法都无法解决一个问题：假设有A、B两个都很耗时的函数，无法降低它们相互之间的影响。第4种方法可以解决这个问题，但是实践起来有难度。</p>
+<p>通常的裸机程序流程图如下<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E8%A3%B8%E6%9C%BA%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg?raw=true"></p>
+<h4 id="RTOS-1"><a href="#RTOS-1" class="headerlink" title="RTOS"></a>RTOS</h4><p>在RTOS中，我们可以把要实现的功能划分为多个任务，每个任务负责实现其中的一部分，每个任务都是一个很简单的程序，通常是一个死循环。 RTOS操作系统的核心内容在于：实时内核。</p>
+<p>RTOS的内核负责管理所有的任务，内核决定了运行哪个任务，何时停止当前任务切换到其他任务，这个是内核的多任务管理能力。多任务管理给人的感觉就好像芯片有多个CPU，多任务管理实现了CPU资源的最大化利用，多任务管理有助于实现程序的模块化开发，能够实现复杂的实时应用。可剥夺内核顾名思义就是可以剥夺其他任务的CPU使用权，它总是运行就绪任务中的优先级最高的那个任务。</p>
+<p>加入操作系统后，开发人员不需要关注每个功能模块之间的冲突，重心放在子程序的实现。缺点是整个系统随之带来的额外RAM开销，但对目前的单片机的来影响不大。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/RTOS%E7%A8%8B%E5%BA%8F%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg?raw=true"><br>优点：</p>
+<ul>
+<li>用户无需关心时间信息<br>内核负责调度任务，用户编写程序结构简单</li>
+<li>模块化，可扩展性强<br>各个任务是独立的，降低耦合度</li>
+<li>中断进程短</li>
+<li>效率高</li>
+</ul>
+<h2 id="FreeRTOS相关概念"><a href="#FreeRTOS相关概念" class="headerlink" title="FreeRTOS相关概念"></a>FreeRTOS相关概念</h2><h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/FreeRTOS%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD.jpg?raw=true"></p>
+<h3 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h3>
                 
             </div>
             <hr/>
@@ -522,7 +535,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">NTGafield</a>
+                    <a href="/about" rel="external nofollow noreferrer">NTGarfield</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -532,7 +545,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://NTGarfield.github.io/2025/10/02/hello-world/">https://NTGarfield.github.io/2025/10/02/hello-world/</a>
+                    <a href="https://NTGarfield.github.io/2025/10/07/freertos-xue-xi-yi/">https://NTGarfield.github.io/2025/10/07/freertos-xue-xi-yi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -545,7 +558,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">NTGafield</a>
+                    <a href="/about" target="_blank">NTGarfield</a>
                     !
                 </span>
             </div>
@@ -569,7 +582,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/FreeRTOS/">
+                                    <span class="chip bg-color">FreeRTOS</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -646,50 +663,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/10/05/ying-jian-ji-chu-yi/">
+                <a href="/2025/10/07/freertos-xue-xi-yi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="硬件基础（一）">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="FreeRTOS学习（一）">
                         
-                        <span class="card-title">硬件基础（一）</span>
+                        <span class="card-title">FreeRTOS学习（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            常见器件及其特性
+                            FreeRTOS初识
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6/" class="post-category">
-                                    嵌入式硬件
+                            <a href="/categories/CPP/" class="post-category">
+                                    CPP
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
-                        <span class="chip bg-color">嵌入式</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%A1%AC%E4%BB%B6/">
-                        <span class="chip bg-color">硬件</span>
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
                     </a>
                     
                 </div>
@@ -703,31 +718,38 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/08/08/mei-ri-yi-ti-yi/">
+                <a href="/2025/10/06/cmake/">
                     <div class="card-image">
                         
+                        <img src="https://github.com/NTGarfield/MyPic/blob/img/text/CMake%E5%B0%81%E9%9D%A2.png?raw=true" class="responsive-img" alt="CMake">
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="每日一题(一)">
-                        
-                        <span class="card-title">每日一题(一)</span>
+                        <span class="card-title">CMake</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            二分查找 || IEEE 754
+                            CMake入门
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" class="post-category">
-                                    每日一题
+                            <a href="/categories/C/" class="post-category">
+                                    C
+                                </a>
+                            
+                            <a href="/categories/C/CPP/" class="post-category">
+                                    CPP
+                                </a>
+                            
+                            <a href="/categories/C/CPP/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-category">
+                                    项目管理
                                 </a>
                             
                             
@@ -737,24 +759,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CPP/">
-                        <span class="chip bg-color">CPP</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
-                    </a>
-                    
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C</span>
-                    </a>
-                    
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C#</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/tags/CMake/">
+                        <span class="chip bg-color">CMake</span>
                     </a>
                     
                 </div>

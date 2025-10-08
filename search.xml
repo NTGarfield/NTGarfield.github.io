@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>FreeRTOS学习（一）</title>
+      <link href="/2025/10/07/freertos-xue-xi-yi/"/>
+      <url>/2025/10/07/freertos-xue-xi-yi/</url>
+      
+        <content type="html"><![CDATA[<h2 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>real-time Operate System，实时操作系统，简称RTOS。RTOS 是一种体积小巧、确定性强的计算机操作系统。 RTOS 通常用于需要在<strong>严格时间限制内</strong>对外部事件做出反应的嵌入式系统，如医疗设备和汽车电子控制单元 (ECU)。 通常，此类嵌入式系统中只有一两项功能需要确定性时序，即使嵌入式系统不需要严格的实时反应，使用 RTOS 仍能提供诸多优势。RTOS 通常比通用操作系统体积更小、重量更轻，因此 RTOS 非常适用于 内存、计算和功率受限的设备。</p><h3 id="裸机vsRTOS"><a href="#裸机vsRTOS" class="headerlink" title="裸机vsRTOS"></a>裸机vsRTOS</h3><h4 id="裸机"><a href="#裸机" class="headerlink" title="裸机"></a>裸机</h4><p>裸机系统中，程序的设计模式可以分为：轮询、前后台、定时器驱动、基于状态机。前面三种方法都无法解决一个问题：假设有A、B两个都很耗时的函数，无法降低它们相互之间的影响。第4种方法可以解决这个问题，但是实践起来有难度。</p><p>通常的裸机程序流程图如下<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E8%A3%B8%E6%9C%BA%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg?raw=true"></p><h4 id="RTOS-1"><a href="#RTOS-1" class="headerlink" title="RTOS"></a>RTOS</h4><p>在RTOS中，我们可以把要实现的功能划分为多个任务，每个任务负责实现其中的一部分，每个任务都是一个很简单的程序，通常是一个死循环。 RTOS操作系统的核心内容在于：实时内核。</p><p>RTOS的内核负责管理所有的任务，内核决定了运行哪个任务，何时停止当前任务切换到其他任务，这个是内核的多任务管理能力。多任务管理给人的感觉就好像芯片有多个CPU，多任务管理实现了CPU资源的最大化利用，多任务管理有助于实现程序的模块化开发，能够实现复杂的实时应用。可剥夺内核顾名思义就是可以剥夺其他任务的CPU使用权，它总是运行就绪任务中的优先级最高的那个任务。</p><p>加入操作系统后，开发人员不需要关注每个功能模块之间的冲突，重心放在子程序的实现。缺点是整个系统随之带来的额外RAM开销，但对目前的单片机的来影响不大。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/RTOS%E7%A8%8B%E5%BA%8F%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg?raw=true"><br>优点：</p><ul><li>用户无需关心时间信息<br>内核负责调度任务，用户编写程序结构简单</li><li>模块化，可扩展性强<br>各个任务是独立的，降低耦合度</li><li>中断进程短</li><li>效率高</li></ul><h2 id="FreeRTOS相关概念"><a href="#FreeRTOS相关概念" class="headerlink" title="FreeRTOS相关概念"></a>FreeRTOS相关概念</h2><h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/FreeRTOS%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD.jpg?raw=true"></p><h3 id="时间片"><a href="#时间片" class="headerlink" title="时间片"></a>时间片</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> CPP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> FreeRTOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CMake</title>
       <link href="/2025/10/06/cmake/"/>
       <url>/2025/10/06/cmake/</url>
