@@ -38,7 +38,8 @@ pre[class*="language-"]{
 /*table自定义样式*/
 #articleContent table{
   /* 外观整体 */
-  width: 100% !important;
+  width: min(100%, max-content) !important;  /* 内容宽度与 100% 取较小者 */
+  display: table !important;
   border: 1.2px solid #e5e7eb !important;
   border-radius: 8px !important;
   background: #fff !important;
@@ -70,12 +71,12 @@ pre[class*="language-"]{
   font-size: 13px !important;
   color: #334155 !important;
   vertical-align: middle !important;
+  word-break: break-word !important; /* 长词自动换行 */
 }
 #articleContent table th:last-child,
 #articleContent table td:last-child{ border-right: none !important; }
 
 /* 斑马纹 + 悬停 */
-/* 默认背景，全表清零 */
 #articleContent table tbody tr {
   background: #f5f7fa !important;
   transition: background-color 0.25s ease-in-out;
