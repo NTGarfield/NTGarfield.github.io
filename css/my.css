@@ -1,28 +1,106 @@
 /* Here is your custom css styles. */
-/* 1. 高亮选中代码内容，颜色美观 */
+/* 让代码只按内容宽度排布，而不是铺满整行 */
+pre[class*="language-"] code{
+  display: inline-block !important;   /* 关键：由 block -> inline-block */
+  white-space: pre !important;        /* 保留缩进和换行 */
+}
+
+/* 若启用了行号插件，主题会强制 100% 宽，手动压回去 */
+pre.line-numbers[class*="language-"] > code{
+  display: inline-block !important;
+}
+pre.line-numbers{
+  padding-left: 3.2em !important;     /* 行号栏留白 */
+}
+
+/* 选区颜色（作用在文字与 token 上） */
 pre[class*="language-"] code::selection,
-pre[class*="language-"] code span::selection {
+pre[class*="language-"] code *::selection{
   background: #cce2ff !important;
   color: #000 !important;
 }
 
-/* 2. 行号不跟着变色 */
-pre[class*="language-"] .line-numbers-rows > span::selection {
+/* 行号不跟着变色 */
+pre[class*="language-"] .line-numbers-rows > span::selection{
   background: transparent !important;
-  color: inherit;
+  color: inherit !important;
 }
 
-/* 3. ✅✅✅ 关键：让 PrismJS 的每一行只包住自己文字（避免横向整行块状选区） */
-pre[class*="language-"] code > span.line {
-  display: inline-block !important;
-  width: auto !important;
-  background: transparent !important;
+/* 千万不要禁止 pre 被选中 */
+pre[class*="language-"]{ user-select: text !important; }
+
+pre[class*="language-"]{
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
 }
 
-/* 4. 防止浏览器对 <pre> 元素整块选中 */
-pre[class*="language-"] {
-  user-select: none;            /* 禁用整体选中 */
+
+/*table自定义样式*/
+#articleContent table{
+  /* 外观整体 */
+  width: 100% !important;
+  border: 1.2px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04) !important;
+
+  /* 关键：实现圆角需要 separate + overflow hidden */
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden !important;
 }
-pre[class*="language-"] code {
-  user-select: text !important; /* 仅允许 code 内容被选中 */
+
+/* 表头 */
+#articleContent table thead th{
+  background: #becfe7 !important;
+  color: #2b2f36 !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 10px 12px !important;
+  font-size: 14px !important;
+}
+
+/* 单元格 */
+#articleContent table th,
+#articleContent table td{
+  border-right: 1px solid #e5e7eb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 10px 12px !important;
+  font-size: 13px !important;
+  color: #334155 !important;
+  vertical-align: middle !important;
+}
+#articleContent table th:last-child,
+#articleContent table td:last-child{ border-right: none !important; }
+
+/* 斑马纹 + 悬停 */
+/* 默认背景，全表清零 */
+#articleContent table tbody tr {
+  background: #f5f7fa !important;
+  transition: background-color 0.25s ease-in-out;
+}
+#articleContent table tbody tr:nth-child(odd){ background: #ffffff !important; }
+#articleContent table tbody tr:hover{ background: #edf3ff !important; }
+
+/* 单元格里的 code 小标签效果（如 _config.yml、true/false 等） */
+#articleContent table code{
+  background: #eef2f7 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #1f2937 !important;
+  font-size: 12px !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+}
+
+/* 表格内图片自适应 */
+#articleContent table img{ max-width: 100% !important; height: auto !important; }
+
+/* 移动端横向滚动（只在小屏启用） */
+@media (max-width: 768px){
+  #articleContent table{
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
 }
