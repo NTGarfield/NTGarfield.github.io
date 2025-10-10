@@ -486,14 +486,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -613,7 +613,7 @@
 </ul>
 </li>
 <li>uxPriority：<ul>
-<li>定义任务的执行优先级。</li>
+<li>定义任务的执行优先级。<strong>值越小，优先级越低</strong></li>
 <li>任务优先级的取值范围为 0（最低优先级）到 (configMAX_PRIORITIES – 1)（最高优先级）。configMAX_PRIORITIES 是用户自定义的常量。</li>
 <li>当 configUSE_PORT_OPTIMISED_TASK_SELECTION 设为 0 时，系统在理论上对可用优先级的数量没有上限（仅受数据类型与 MCU 可用 RAM 的限制）。然而，出于内存效率考虑，建议仅定义实际所需的最少数量的优先级，以避免浪费 RAM。</li>
 <li>若传入的 uxPriority 值超过 (configMAX_PRIORITIES – 1)，系统将自动将其截断至最大允许值，而不会产生错误提示。</li>
@@ -655,7 +655,10 @@
 </ul>
 </li>
 </ul>
-<h4 id="xTaskCreateStatic-静态创建任务"><a href="#xTaskCreateStatic-静态创建任务" class="headerlink" title="xTaskCreateStatic-静态创建任务"></a>xTaskCreateStatic-静态创建任务</h4><h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/xTaskCreateStatic()%20function%20prototype.png?raw=true"></p>
+<h4 id="xTaskCreateStatic-静态创建任务"><a href="#xTaskCreateStatic-静态创建任务" class="headerlink" title="xTaskCreateStatic-静态创建任务"></a>xTaskCreateStatic-静态创建任务</h4><blockquote>
+<p>要使该函数可用，必须在 FreeRTOSConfig.h 中将宏configSUPPORT_STATIC_ALLOCATION 设为 1。</p>
+</blockquote>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/xTaskCreateStatic()%20function%20prototype.png?raw=true"></p>
 <h5 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h5><ul>
 <li>创建一个新的任务实例。</li>
 <li>如果使用 xTaskCreate() 创建任务，则所需的 RAM 将自动从 FreeRTOS 的堆（heap）中分配。</li>
@@ -734,6 +737,34 @@
 <ul>
 <li>NULL：任务创建失败。原因是 puxStackBuffer 或 pxTaskBuffer 为 NULL。</li>
 <li>任意非 NULL 值：若返回值为非 NULL，则任务已成功创建，返回值即为该任务的任务句柄（Task Handle）。</li>
+</ul>
+<h2 id="任务删除"><a href="#任务删除" class="headerlink" title="任务删除"></a>任务删除</h2><h3 id="vTaskDelete"><a href="#vTaskDelete" class="headerlink" title="vTaskDelete()"></a>vTaskDelete()</h3><h4 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h4><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/vTaskDelete()%20function%20prototype.png?raw=true"></p>
+<h4 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h4><ul>
+<li>删除一个通过 <strong>xTaskCreate()</strong> 或 <strong>xTaskCreateStatic()</strong> 创建的任务实例。</li>
+<li>被删除的任务不再存在，因此无法进入 Running（运行）状态。</li>
+<li>请勿尝试使用任务句柄（task handle）去引用已经被删除的任务。</li>
+<li>当一个任务被删除时，<strong>空闲任务（idle task）</strong> 负责释放该任务所占用的内存资源，包括任务栈（stack）和任务控制块（Task Control Block，TCB）。因此，当应用程序调用 vTaskDelete() API 函数时，必须确保空闲任务有足够的处理时间（即空闲任务必须被调度执行），否则无法完成这些内存的释放操作。</li>
+<li>仅由 内核（kernel） 为任务分配的内存会在任务被删除时自动释放。而任何由用户自行分配与任务相关的内存或资源（如动态分配的缓冲区等），必须在任务删除时由用户显式释放。</li>
+</ul>
+<h4 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pxTask</td>
+<td>任务句柄</td>
+</tr>
+</tbody></table>
+<ul>
+<li>pxTask：<ul>
+<li>表示被删除任务的句柄（即目标任务）。</li>
+<li>若要获取任务句柄，可在调用 xTaskCreate() 创建任务时，使用其参数 pxCreatedTask；或者使用 xTaskCreateStatic() 创建任务并保存其返回值；也可以通过任务名称调用 xTaskGetHandle() 来获取对应的任务句柄。</li>
+<li>任务也可以自我删除，此时在 vTaskDelete() 的参数中传入 NULL 即可（即用 NULL 代替有效的任务句柄）。</li>
+</ul>
+</li>
 </ul>
 
                 
@@ -1218,7 +1249,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">7.5k</span>
+                        class="white-color">7.9k</span>
             
             
             
