@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CPP(一), 嵌入式/C/CPP/C#/WPF/MVVM/算法">
-    <meta name="description" content="vector || 引用">
+    <meta name="keywords" content="FreeRTOS学习（三）, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="FreeRTOS系统延时">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CPP(一) | NTGafield</title>
+    <title>FreeRTOS学习（三） | NTGafield</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -415,12 +415,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CPP(一)</h1>
+                    <h1 class="description center-align post-title">FreeRTOS学习（三）</h1>
                 </div>
             </div>
         </div>
@@ -444,8 +444,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CPP/">
-                                <span class="chip bg-color">CPP</span>
+                            <a href="/tags/FreeRTOS/">
+                                <span class="chip bg-color">FreeRTOS</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                                <span class="chip bg-color">嵌入式软件</span>
                             </a>
                         
                     </div>
@@ -456,8 +460,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%BC%96%E7%A8%8B/" class="post-category">
-                                编程
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                嵌入式软件
+                            </a>
+                        
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/RTOS/" class="post-category">
+                                RTOS
                             </a>
                         
                     </div>
@@ -471,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-08
+                    2025-10-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    636
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    4 分
                 </div>
                 
 
@@ -509,142 +517,94 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="vector-容器"><a href="#vector-容器" class="headerlink" title="vector 容器"></a>vector 容器</h1><p>CPP中<strong>vector</strong>是一种序列容器</p>
-<ul>
-<li>基于数组的数据结构</li>
-<li>大小可根据需要动态增长和缩小</li>
-<li>存储内存连续</li>
-<li>可存储数据类型不限</li>
-</ul>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><ul>
-<li>使用时要包含头文件</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>创建vector</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> myVector<span class="token punctuation">;</span>  <span class="token comment">//存储int的空vector</span>
-std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//长度为5，默认值是0</span>
-std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//默认值 10</span>
-std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">&gt;</span> myVector <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment">//初始化</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>添加元素</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">myVector<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//添加7到末尾</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>访问元素<br>两种方法</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> x <span class="token operator">=</span> myVector<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> y <span class="token operator">=</span> myVector<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ul>
-<li>元素个数</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> size <span class="token operator">=</span> myVector<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>删除元素</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">myVector<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>myVector<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//删除第三个元素</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>迭代访问</li>
-</ul>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*迭代访问器*/</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> myVector<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> myVector<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token operator">*</span>it <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token comment">/*范围循环*/</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> element <span class="token operator">:</span> myVector<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> element <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="迭代器（iterator）"><a href="#迭代器（iterator）" class="headerlink" title="迭代器（iterator）"></a>迭代器（iterator）</h1><p><strong>iterator</strong>是CPP STL（标准模板库）中核心概念之一</p>
-<blockquote>
-<p>itreator 是一个“抽象指针”，用于顺序访问容器中的元素</p>
+                <h2 id="延时函数"><a href="#延时函数" class="headerlink" title="延时函数"></a>延时函数</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>vTaskDelay</strong></td>
+<td>相对延时</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>vTaskDelayUntil</strong></td>
+<td>绝对延时</td>
+<td>可设置周期性任务</td>
+</tr>
+</tbody></table>
+<h4 id="vTaskDelay"><a href="#vTaskDelay" class="headerlink" title="vTaskDelay"></a>vTaskDelay</h4><blockquote>
+<p>FreeRTOSConfig.h中的INCLUDE_vTaskDelay必须设置为1，才能使用vTaskDelay() API函数。</p>
 </blockquote>
-<blockquote>
-<p>可以用统一的方式操作不同的容器</p>
-</blockquote>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><h2 id="什么是引用"><a href="#什么是引用" class="headerlink" title="什么是引用"></a>什么是引用</h2><p>引用其实就是一个<strong>指针常量</strong>，只想不能改变，只能指向一个指定的变量<br>引用相当于为一个变量起的别名</p>
+<h5 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h5><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/vTaskDelay()%20function%20prototype.png?raw=true"></p>
+<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><ul>
+<li>vTaskDelay() 函数用于将调用该函数的任务置于 <strong>阻塞态（Blocked state）</strong>，持续指定数量的 系统节拍中断（tick interrupts）。</li>
+<li>如果延时时间参数为 0 个节拍，任务不会进入阻塞态，而是直接让出（yield）处理器使用权给处于就绪态（Ready state）且具有相同优先级的其他任务。因此，调用 vTaskDelay(0) 的效果等同于调用 taskYIELD()。</li>
+</ul>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xTicksToDelay</td>
+<td>保持在阻塞态的节拍数</td>
+</tr>
+</tbody></table>
 <ul>
-<li>引用只有声明，没有定义，声明时必须同时初始化</li>
-<li>在声明后，不能再使之作为另一变量的引用</li>
-<li>不能建立引用数组</li>
-<li>不能建立引用的引用</li>
-<li>不能建立指向引用的指针</li>
-<li>可以取引用地址</li>
+<li>xTicksToDelay：<ul>
+<li>指定任务在被转换回就绪态（Ready state）之前保持在阻塞态的节拍数。例如：若当前系统节拍计数值为 10,000，任务调用 vTaskDelay(100)，则该任务会立即进入阻塞态，并保持阻塞直至系统节拍计数达到 10,100。</li>
+<li>在调用 vTaskDelay() 到下一个节拍中断到来之间的任何时间，都将被视为一个完整的节拍周期。因此，指定延时时间的最大时间分辨率，在最坏情况下等于一个完整的系统节拍中断周期。例如：<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E5%BB%B6%E6%97%B6tick%E7%9B%B8%E5%85%B3%E8%A7%A3%E9%87%8A.jpg?raw=true"><br>t = 100.3 ms，任务调用 vTaskDelay(1)。此时当前 tick 计数为 100。系统记录：需要延时 1 tick，即直到 tick 计数到达 101。t = 100.3 ms ~ 101 ms，任务立即进入 Blocked（阻塞态）。虽然此时距离下一次 tick 中断还有 0.7 ms，但这段时间也被算作“一个完整 tick 周期”。t = 101 ms（下一次 tick 中断到来），tick 计数增加到 101。延时完成，任务从 Blocked → Ready 状态转移，等待调度器再次分配 CPU。</li>
+<li>宏定义 pdMS_TO_TICKS() 可用于将 毫秒（ms） 转换为 节拍数（ticks）。</li>
 </ul>
-<h2 id="引用的使用"><a href="#引用的使用" class="headerlink" title="引用的使用"></a>引用的使用</h2><p>引用机制主要作为函数参数</p>
-<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>一般有两种方法：（1）值传递（2）地址传递</p>
-<ol>
-<li>值传递<ul>
-<li>将变量名作为实参和形参</li>
-</ul>
- <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
-  <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-  <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    <span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//函数声明</span>
-    <span class="token keyword">int</span> i<span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">,</span> j<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
-    <span class="token function">swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    cout<span class="token operator">&lt;&lt;</span>i<span class="token operator">&lt;&lt;</span><span class="token string">" "</span><span class="token operator">&lt;&lt;</span>j<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> temp<span class="token punctuation">;</span>
-    temp <span class="token operator">=</span> a<span class="token punctuation">;</span>
-    a <span class="token operator">=</span> b<span class="token punctuation">;</span>
-    b <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>输出：3&nbsp;&nbsp;&nbsp;5</p>
-</blockquote>
-<ul>
-<li>传递变量地址</li>
-</ul>
- <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> j<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
-    <span class="token function">swap</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>i<span class="token punctuation">,</span> <span class="token operator">&amp;</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    cout<span class="token operator">&lt;&lt;</span>i<span class="token operator">&lt;&lt;</span><span class="token string">" "</span><span class="token operator">&lt;&lt;</span>j<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>p1<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> temp<span class="token punctuation">;</span>
-    temp <span class="token operator">=</span> <span class="token operator">*</span>p1<span class="token punctuation">;</span>
-    <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>p2<span class="token punctuation">;</span>
-    <span class="token operator">*</span>p2 <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>输出：5&nbsp;&nbsp;&nbsp;3</p>
-</blockquote>
 </li>
-<li>地址传递<br>以引用作为形参<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
- <span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> j<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
- <span class="token function">swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span>
- cout<span class="token operator">&lt;&lt;</span>i<span class="token operator">&lt;&lt;</span><span class="token string">" "</span><span class="token operator">&lt;&lt;</span>j<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
- <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>a<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>b<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
- <span class="token keyword">int</span> temp<span class="token punctuation">;</span>
- temp <span class="token operator">=</span> a<span class="token punctuation">;</span>
- a <span class="token operator">=</span> b<span class="token punctuation">;</span>
- b <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>输出：5&nbsp;&nbsp;&nbsp;3</p>
+</ul>
+<h4 id="vTaskDelayUntil"><a href="#vTaskDelayUntil" class="headerlink" title="vTaskDelayUntil"></a>vTaskDelayUntil</h4><blockquote>
+<p>INCLUDE_vTaskDelayUntil必须在FreeRTOSConfig.h中设置为1，才能使用vTaskDelay() API函数。</p>
 </blockquote>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/vTaskDelayUntil()%20function%20prototype.png?raw=true"></p>
+<h5 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h5><ul>
+<li>vTaskDelayUntil() 函数用于将调用该函数的任务置于 阻塞态（Blocked state），直至系统时钟达到指定的 <strong>绝对时间（absolute time）</strong> 后才恢复执行。</li>
+<li>周期性任务（Periodic Tasks）可通过调用 vTaskDelayUntil() 来实现恒定的执行频率（constant execution frequency），从而保证任务以稳定的周期运行。</li>
+</ul>
+<h5 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pxPreviousWakeTime</td>
+<td>保存任务上一次退出阻塞态（Blocked state）的系统时间</td>
+</tr>
+<tr>
+<td>xTimeIncrement</td>
+<td>设定任务的执行周期</td>
+</tr>
+</tbody></table>
+<ul>
+<li>pxPreviousWakeTime：<ul>
+<li>该参数命名的前提是假设 vTaskDelayUntil() 被用于实现周期性任务（periodic task），即任务以固定频率循环执行。在这种情况下，pxPreviousWakeTime 用于保存任务上一次退出阻塞态（Blocked state）的系统时间（即任务被“唤醒”时的 tick 计数值）。该时间点被用作参考，用以计算任务下一次应当退出阻塞态的时刻。</li>
+<li>指针 pxPreviousWakeTime 所指向的变量会在 vTaskDelayUntil() 函数内部自动更新，因此在任务运行过程中无需用户手动修改，仅在变量首次初始化时需要由用户设定。</li>
+</ul>
 </li>
-</ol>
+<li>xTimeIncrement：<ul>
+<li>该参数同样基于 vTaskDelayUntil() 用于实现周期性且固定频率执行任务的假设而命名。</li>
+<li>参数 xTimeIncrement 用于设定任务的执行周期（Execution Period），从而定义任务的固定执行频率。</li>
+<li>xTimeIncrement 的单位为 系统节拍数（ticks）。</li>
+<li>宏定义 pdMS_TO_TICKS() 可用于将毫秒（ms）转换为节拍数（ticks），以便在编程时更直观地指定任务周期。</li>
+</ul>
+</li>
+</ul>
+<h3 id="对比分析"><a href="#对比分析" class="headerlink" title="对比分析"></a>对比分析</h3><h4 id="系统节拍："><a href="#系统节拍：" class="headerlink" title="系统节拍："></a>系统节拍：</h4><p>想要系统正常运行，那么时钟节拍是必不可少的，FreeRTOS的时钟节拍通常由SysTick提供，它周期性的产生定时中断，所谓的时钟节拍管理的核心就是这个定时中断的服务程序。FreeRTOS的时钟节拍isr中核心的工作就是调用vTaskIncrementTick()函数。</p>
+<h4 id="相对和绝对任务延时区别"><a href="#相对和绝对任务延时区别" class="headerlink" title="相对和绝对任务延时区别"></a>相对和绝对任务延时区别</h4><p>调用vTaskDelay() 的任务进入 阻塞态（Blocked state），并保持阻塞指定数量的 系统节拍数（ticks）。任务退出阻塞态的时间是相对于<strong>调用 vTaskDelay() 的时刻</strong>（relative to when vTaskDelay() was called）来计算的。换言之，延时是相对延时（relative delay），即从调用函数开始计时。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%9B%B8%E5%AF%B9%E5%BB%B6%E6%97%B6%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E7%A4%BA%E6%84%8F%E5%9B%BE.png?raw=true"><br>同样，调用vTaskDelayUntil() 的任务进入 阻塞态（Blocked state），但其保持阻塞直至系统时钟达到指定的绝对时间（absolute time）。使用 vTaskDelayUntil() 的任务将在精确的目标时间点退出阻塞态，而非相对于函数调用时刻的延时。因此，vTaskDelayUntil() 实现的是绝对延时（absolute delay）机制，适用于<strong>固定周期</strong>执行的任务（periodic tasks），可确保任务周期恒定、执行频率稳定。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%BB%9D%E5%AF%B9%E5%BB%B6%E6%97%B6%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E7%A4%BA%E6%84%8F%E5%9B%BE.png?raw=true"></p>
+<p>参考资料<br>[1]<a target="_blank" rel="noopener" href="https://aijishu.com/a/1060000000017522">https://aijishu.com/a/1060000000017522</a></p>
 
                 
             </div>
@@ -671,7 +631,7 @@ std<span class="token double-colon punctuation">::</span>vector<span class="toke
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://NTGarfield.github.io/2025/08/06/cpp-yi/">https://NTGarfield.github.io/2025/08/06/cpp-yi/</a>
+                    <a href="https://NTGarfield.github.io/2025/10/10/freertos-xue-xi-san/">https://NTGarfield.github.io/2025/10/10/freertos-xue-xi-san/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -709,8 +669,12 @@ std<span class="token double-colon punctuation">::</span>vector<span class="toke
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CPP/">
-                                    <span class="chip bg-color">CPP</span>
+                                <a href="/tags/FreeRTOS/">
+                                    <span class="chip bg-color">FreeRTOS</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                                    <span class="chip bg-color">嵌入式软件</span>
                                 </a>
                             
                         </div>
@@ -789,66 +753,56 @@ std<span class="token double-colon punctuation">::</span>vector<span class="toke
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/08/08/mei-ri-yi-ti-yi/">
+                <a href="/2025/10/10/freertos-xue-xi-san/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="每日一题(一)">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="FreeRTOS学习（三）">
                         
-                        <span class="card-title">每日一题(一)</span>
+                        <span class="card-title">FreeRTOS学习（三）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            二分查找 || IEEE 754
+                            FreeRTOS系统延时
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-08-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                    嵌入式软件
                                 </a>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                    数据结构
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/RTOS/" class="post-category">
+                                    RTOS
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CPP/">
-                        <span class="chip bg-color">CPP</span>
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
-                    </a>
-                    
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C</span>
-                    </a>
-                    
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C#</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">嵌入式软件</span>
                     </a>
                     
                 </div>
@@ -862,31 +816,35 @@ std<span class="token double-colon punctuation">::</span>vector<span class="toke
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/07/29/linear-list-xian-xing-biao/">
+                <a href="/2025/10/09/freertos-xue-xi-er/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linear List(线性表)">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="FreeRTOS学习（二）">
                         
-                        <span class="card-title">Linear List(线性表)</span>
+                        <span class="card-title">FreeRTOS学习（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            LinearList以及CPP实现
+                            FreeRTOS任务相关概念
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                    数据结构与算法
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                    嵌入式软件
+                                </a>
+                            
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/RTOS/" class="post-category">
+                                    RTOS
                                 </a>
                             
                             
@@ -896,12 +854,12 @@ std<span class="token double-colon punctuation">::</span>vector<span class="toke
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CPP/">
-                        <span class="chip bg-color">CPP</span>
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">嵌入式软件</span>
                     </a>
                     
                 </div>
