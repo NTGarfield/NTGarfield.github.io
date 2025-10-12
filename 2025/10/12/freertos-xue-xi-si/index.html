@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="硬件基础（一）, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
-    <meta name="description" content="常见器件及其特性">
+    <meta name="keywords" content="FreeRTOS学习（四）, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="FreeRTOS空闲任务">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>硬件基础（一） | NTGafield</title>
+    <title>FreeRTOS学习（四） | NTGafield</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -415,12 +415,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">硬件基础（一）</h1>
+                    <h1 class="description center-align post-title">FreeRTOS学习（四）</h1>
                 </div>
             </div>
         </div>
@@ -444,8 +444,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6/">
-                                <span class="chip bg-color">嵌入式硬件</span>
+                            <a href="/tags/FreeRTOS/">
+                                <span class="chip bg-color">FreeRTOS</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                                <span class="chip bg-color">嵌入式软件</span>
                             </a>
                         
                     </div>
@@ -456,8 +460,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6/" class="post-category">
-                                嵌入式硬件
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                嵌入式软件
+                            </a>
+                        
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/RTOS/" class="post-category">
+                                RTOS
                             </a>
                         
                     </div>
@@ -471,21 +479,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-08
+                    2025-10-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    353
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -509,26 +517,85 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="电容"><a href="#电容" class="headerlink" title="电容"></a>电容</h2><ul>
-<li>放电特性</li>
-<li>储能特性</li>
-<li>两端的电压不能突变（为充满电时）</li>
-</ul>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>储能特性：可实现关电延迟 </li>
-<li>稳定电压（滤波）：电源非理想电源，比如电路发生变化，并联电路开关突然闭合，会造成电压跌落，导致死机复位等问题。 并联一个电容，其储能功能可以补偿电流，起到稳压。图中，C5是稳压电容。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%94%B5%E5%AE%B9%E7%A8%B3%E5%8E%8B.png?raw=true"></li>
-</ul>
-<h3 id="容抗计算公式"><a href="#容抗计算公式" class="headerlink" title="容抗计算公式"></a>容抗计算公式</h3><p>$$R_c=\frac{1}{2\pi fc}$$<br>频率：加在电容上的电压频率<br>电容在频率越高时，阻抗越小，频率越低时，阻抗越大<br><strong>隔直流，通交流</strong></p>
-<h3 id="低通滤波电路"><a href="#低通滤波电路" class="headerlink" title="低通滤波电路"></a>低通滤波电路</h3><p>低通滤波电路可以让低频信号通过，衰减高频的信号。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E7%94%B5%E8%B7%AF.png?raw=true"><br>低通滤波电路截止频率：<br>$$f_t=\frac{1}{2\pi RC}\$$<br>在实际电路中，输入电压通常有高频噪声，可利用低通滤波电路滤掉。</p>
-<h3 id="高通滤波电路"><a href="#高通滤波电路" class="headerlink" title="高通滤波电路"></a>高通滤波电路</h3><p>让高频信号通过，衰减低频信号（工频干扰，比如未共地）<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E9%AB%98%E9%80%9A%E6%BB%A4%E6%B3%A2%E7%94%B5%E8%B7%AF.png?raw=true"></p>
-<blockquote>
-<p>高频or低频是相对于截止频率而言的</p>
-</blockquote>
-<h2 id="电感"><a href="#电感" class="headerlink" title="电感"></a>电感</h2><p>任何一个导线都可以看作一个很小的电阻+很小的电感<br>应用：电机、喇叭</p>
+                <h3 id="空闲任务（Idle-Task）"><a href="#空闲任务（Idle-Task）" class="headerlink" title="空闲任务（Idle Task）"></a>空闲任务（Idle Task）</h3><p>FreeRTOS 是一个基于抢占或时间片轮转的多任务内核。它的运行逻辑大致是：</p>
 <ul>
-<li>流过电感的电流不能突变</li>
-<li>常见电路中，电感只能改变电路中的电流变化速度，但不能改变电流最大值</li>
+<li>内核维持若干个任务（Task Control Block, TCB）；</li>
+<li>调度器（Scheduler）每次从Ready 队列中选出优先级最高的任务；</li>
+<li>把 CPU 上下文切换到该任务，进入 Running；</li>
+<li>如果当前任务阻塞（Block）或挂起（Suspend），就从 Ready 列表移除；</li>
+<li>调度器再次选取新的 Ready 任务运行。</li>
 </ul>
+<p>空闲任务在调度器启动时（vTaskStartScheduler()）自动创建，以确保始终<strong>至少有一个任务</strong>能够运行（至少有一个任务处于就绪状态）。</p>
+<p>如果没有空闲任务：<br>所有任务若都处在挂起态或者阻塞态，那么就绪列表中没有可以进入运行态的任务，系统中没有任何任务可以运行。此时如果没有 Idle Task，调度器在选择“下一个任务”时将找不到任何可运行对象。<br>这会导致一些问题，比如：</p>
+<ul>
+<li>内核调度器进入死循环；</li>
+<li>系统停滞（硬件仍在运行，但没有上下文可切换）；</li>
+<li>某些版本下甚至可能触发断言或硬错误。</li>
+</ul>
+<p>系统中必须至少存在一个能够进入 运行态（Running state） 的任务。为了确保这一点，当调用 vTaskStartScheduler() 时，调度器会自动创建一个 空闲任务（Idle Task）。空闲任务的主要功能只是循环执行一些简单操作。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//通用任务函数</span>
+<span class="token keyword">void</span> <span class="token function">vTaskFunction</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span>pvParameters <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>pcTaskName<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> TickType_t xDelay250ms <span class="token operator">=</span> <span class="token function">pdMS_TO_TICKS</span><span class="token punctuation">(</span> <span class="token number">250</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    pcTaskName <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token keyword">char</span> <span class="token operator">*</span> <span class="token punctuation">)</span> pvParameters<span class="token punctuation">;</span>
+    <span class="token comment">/* As per most tasks, this task is implemented in an infinite loop. */</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> pcTaskName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">vTaskDelay</span><span class="token punctuation">(</span> xDelay250ms <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//进入阻塞态</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//任务创建</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>pcTextForTask1 <span class="token operator">=</span> <span class="token string">"Task 1 is running\r\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>pcTextForTask2 <span class="token operator">=</span> <span class="token string">"Task 2 is running\r\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//...</span>
+    <span class="token function">xTaskCreate</span><span class="token punctuation">(</span> vTaskFunction<span class="token punctuation">,</span> <span class="token string">"Task 1"</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>pcTextForTask1<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">xTaskCreate</span><span class="token punctuation">(</span> vTaskFunction<span class="token punctuation">,</span> <span class="token string">"Task 2"</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>pcTextForTask2<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token constant">NULL</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//高优先级</span>
+
+    <span class="token comment">/* Start the scheduler. */</span>
+    <span class="token function">vTaskStartScheduler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//空闲任务在此创建</span>
+
+    <span class="token comment">/* Will only get here if there was not enough heap space to create the
+     * idle task. */</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上述例子任务执行时序图<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BB%BB%E5%8A%A1%E4%BD%BF%E7%94%A8vTaskDelay()%E8%BF%9B%E5%85%A5%E9%98%BB%E5%A1%9E%E7%8A%B6%E6%80%81.png?raw=true"></p>
+<p>空闲任务的<strong>优先级最低（优先级为 0）</strong>，以确保它不会阻止任何更高优先级的应用任务进入运行态。当然，应用程序设计者也可以创建与空闲任务相同优先级的任务，从而共享该优先级。</p>
+<p>编译时配置常量 configIDLE_SHOULD_YIELD 定义于 FreeRTOSConfig.h 文件中，可用于控制空闲任务是否在合适时机主动让出 CPU 处理时间。若禁用该选项，空闲任务可能会消耗本可分配给其他应用任务的处理时间。</p>
+<p>由于空闲任务运行在最低优先级，它会在任意更高优先级的任务进入 就绪态（Ready state） 时立刻被切出运行态。例如，在图 17 的时间点 tn 可观察到，当任务 2 解除阻塞（即离开 Blocked 状态）时，空闲任务立即被切出，使任务 2 得以执行。此时称任务 2 抢占（pre-empt） 了空闲任务。抢占过程完全自动进行，无需被抢占任务的参与或感知。</p>
+<blockquote>
+<p>由于空闲任务负责在任务删除（此处指自杀任务，他杀任务由vTaskDelete()函数清理）后清理内核资源。若应用程序使用了vTaskDelete(xHandle)函数，则必须确保空闲任务不会被饿死（即不会长期得不到运行）。</p>
+</blockquote>
+<h3 id="空闲任务钩子函数（Idle-Task-Hook-Functions）"><a href="#空闲任务钩子函数（Idle-Task-Hook-Functions）" class="headerlink" title="空闲任务钩子函数（Idle Task Hook Functions）"></a>空闲任务钩子函数（Idle Task Hook Functions）</h3><p>可以通过空闲钩子函数（idle hook 或 idle callback）向空闲任务中添加用户自定义的功能。<br>空闲钩子函数会在空闲任务每次循环执行时自动被调用一次，从而允许用户在系统空闲时执行特定的应用逻辑。</p>
+<p>函数原型：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//The idle task hook function name and prototype</span>
+<span class="token keyword">void</span> <span class="token function">vApplicationIdleHook</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>vApplicationIdleHook在FreeRTOS文件的位置：进入vTaskStartScheduler()，进入prvCreateIdleTasks()，找到下面这段代码，F12定位prvIdleTask</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">if</span> <span class="token expression"><span class="token punctuation">(</span> configNUMBER_OF_CORES <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span></span></span>
+       <span class="token punctuation">{</span>
+           pxIdleTaskFunction <span class="token operator">=</span> <span class="token operator">&amp;</span>prvIdleTask<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>F12定位prvIdleTask找到函数portTASK_FUNCTION，内有如下代码</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token operator">&gt;</span>#<span class="token keyword">if</span> <span class="token punctuation">(</span> configUSE_IDLE_HOOK <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+<span class="token operator">&gt;</span><span class="token punctuation">{</span>
+  <span class="token comment">/* Call the user defined function from within the idle task. */</span>
+  <span class="token function">vApplicationIdleHook</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>
+<h4 id="钩子函数常见用途"><a href="#钩子函数常见用途" class="headerlink" title="钩子函数常见用途"></a>钩子函数常见用途</h4><blockquote>
+<p>在FreeRTOSConfig.h中，configUSE_IDLE_HOOK必须设置为1，空闲钩子函数才能被调用。</p>
+</blockquote>
+<p>空闲任务钩子函数通常可用于以下场景：</p>
+<ul>
+<li>执行低优先级、后台或持续运行的处理功能。（例如周期性数据记录、诊断、系统状态监控等不会影响实时性的后台任务。）</li>
+<li>测量系统的空闲处理能力。（空闲任务仅在所有更高优先级的任务均无工作可执行时才会运行；因此，统计空闲任务所占的 CPU 时间即可清晰反映系统的空闲处理能力。）</li>
+<li>将处理器置于低功耗模式。这是一种在系统无任务执行时自动节能的简单方法。尽管通过这种方式实现的节能效果不如无时钟空闲模式（tick-less idle mode）显著，但仍能在无需复杂控制的情况下自动降低功耗。<br>空闲任务钩子函数的实现限制（Limitations on the Implementation of Idle Task Hook Functions）</li>
+</ul>
+<h4 id="钩子函数的实现必须遵循以下规则："><a href="#钩子函数的实现必须遵循以下规则：" class="headerlink" title="钩子函数的实现必须遵循以下规则："></a>钩子函数的实现必须遵循以下规则：</h4><p>空闲任务钩子函数在执行期间绝不能调用任何可能导致任务进入阻塞（Blocked）或挂起（Suspended）状态的 FreeRTOS API 函数。一旦空闲任务被阻塞，系统在无其他就绪任务时将无法调度到任何可运行任务，从而导致调度器停滞。</p>
+<p>此外，当应用程序使用了 vTaskDelete() API 删除任务时，空闲任务还负责清理被删除任务所占用的内核资源。因此，空闲任务钩子函数必须在合理的时间内返回，以便空闲任务能周期性地执行资源回收操作。若钩子函数陷入无限循环或长时间占用 CPU，使空闲任务无法返回主循环，则任务删除后的资源将无法被及时释放，可能引发内存泄漏或系统异常。</p>
 
                 
             </div>
@@ -555,7 +622,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://NTGarfield.github.io/2025/10/05/ying-jian-ji-chu-yi/">https://NTGarfield.github.io/2025/10/05/ying-jian-ji-chu-yi/</a>
+                    <a href="https://NTGarfield.github.io/2025/10/12/freertos-xue-xi-si/">https://NTGarfield.github.io/2025/10/12/freertos-xue-xi-si/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -593,8 +660,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6/">
-                                    <span class="chip bg-color">嵌入式硬件</span>
+                                <a href="/tags/FreeRTOS/">
+                                    <span class="chip bg-color">FreeRTOS</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                                    <span class="chip bg-color">嵌入式软件</span>
                                 </a>
                             
                         </div>
@@ -673,45 +744,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/10/06/cmake/">
+                <a href="/2025/10/12/freertos-xue-xi-si/">
                     <div class="card-image">
                         
-                        <img src="https://github.com/NTGarfield/MyPic/blob/img/text/CMake%E5%B0%81%E9%9D%A2.png?raw=true" class="responsive-img" alt="CMake">
                         
-                        <span class="card-title">CMake</span>
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="FreeRTOS学习（四）">
+                        
+                        <span class="card-title">FreeRTOS学习（四）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            CMake入门
+                            FreeRTOS空闲任务
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-category">
-                                    项目管理
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                    嵌入式软件
+                                </a>
+                            
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/RTOS/" class="post-category">
+                                    RTOS
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CMake/">
-                        <span class="chip bg-color">CMake</span>
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">嵌入式软件</span>
                     </a>
                     
                 </div>
@@ -725,35 +807,35 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/08/08/mei-ri-yi-ti-yi/">
+                <a href="/2025/10/10/freertos-xue-xi-san/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="每日一题(一)">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="FreeRTOS学习（三）">
                         
-                        <span class="card-title">每日一题(一)</span>
+                        <span class="card-title">FreeRTOS学习（三）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            二分查找 || IEEE 754
+                            FreeRTOS系统延时
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-08-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                    嵌入式软件
                                 </a>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                    数据结构
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/RTOS/" class="post-category">
+                                    RTOS
                                 </a>
                             
                             
@@ -763,24 +845,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CPP/">
-                        <span class="chip bg-color">CPP</span>
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
-                    </a>
-                    
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C</span>
-                    </a>
-                    
-                    <a href="/tags/C/">
-                        <span class="chip bg-color">C#</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">嵌入式软件</span>
                     </a>
                     
                 </div>
@@ -935,13 +1005,6 @@
 
 </main>
 
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 
