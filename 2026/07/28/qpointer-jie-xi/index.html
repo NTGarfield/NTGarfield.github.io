@@ -582,7 +582,7 @@ ptr <span class="token operator">=</span> anotherRaw<span class="token punctuati
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/QPointer%E5%BC%82%E6%AD%A5%E5%9B%9E%E8%B0%83.png?raw=true"></p>
+<p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/QPointer%E5%BC%82%E6%AD%A5%E5%9B%9E%E8%B0%83.png?raw=true" alt="QPointer 异步回调"></p>
 <h3 id="4-3-观察者模式与事件过滤器"><a href="#4-3-观察者模式与事件过滤器" class="headerlink" title="4.3 观察者模式与事件过滤器"></a>4.3 观察者模式与事件过滤器</h3><p>当在一个长生命周期对象中观测另一个临时对象时，使用 QPointer 替代裸成员变量，可避免在观测者中被调用时访问野指针。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Observer</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">QObject</span></span> <span class="token punctuation">{</span>
     QPointer<span class="token operator">&lt;</span>QObject<span class="token operator">&gt;</span> m_subject<span class="token punctuation">;</span>
