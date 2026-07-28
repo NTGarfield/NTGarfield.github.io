@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CMake, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
-    <meta name="description" content="CMake入门">
+    <meta name="keywords" content="QPointer 解析, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="QPointer">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CMake | NTGafield</title>
+    <title>QPointer 解析 | NTGafield</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -415,12 +415,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://github.com/NTGarfield/MyPic/blob/img/text/CMake%E5%B0%81%E9%9D%A2.png?raw=true')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://github.com/NTGarfield/MyPic/blob/img/text/Qt%E5%B0%81%E9%9D%A2.png?raw=true')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CMake</h1>
+                    <h1 class="description center-align post-title">QPointer 解析</h1>
                 </div>
             </div>
         </div>
@@ -444,8 +444,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CMake/">
-                                <span class="chip bg-color">CMake</span>
+                            <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">软件开发</span>
+                            </a>
+                        
+                            <a href="/tags/Qt/">
+                                <span class="chip bg-color">Qt</span>
                             </a>
                         
                     </div>
@@ -456,8 +460,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-category">
-                                项目管理
+                            <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-category">
+                                软件开发
                             </a>
                         
                     </div>
@@ -471,21 +475,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-08
+                    2026-07-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    315
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -509,23 +513,93 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="编译过程-tool-chain"><a href="#编译过程-tool-chain" class="headerlink" title="编译过程 tool chain"></a>编译过程 tool chain</h2><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg?raw=true"></p>
-<h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>Makefile 是用于管理项目构建过程的工具，广泛用于 C/C++ 等语言的编译。它通过定义规则和指令，自动化编译、链接等步骤，大大简化了开发者的工作。<br>Makefile 是 make 命令所读取的<strong>配置文件</strong>，包含了构建项目的规则。其主要作用是检查项目文件的依赖关系，自动执行必要的命令，从而更新目标文件。一般来说，Makefile 主要包括以下三部分内容：</p>
-<ul>
-<li>目标（Target）：需要生成的文件，例如可执行文件。</li>
-<li>依赖（Dependencies）：生成目标所依赖的文件或目标。</li>
-<li>命令（Commands）：构建目标时需要执行的命令。<blockquote>
-<p>makefile 依赖编译平台，且手动编写工作量较大，解决依赖关系易出错</p>
+                <h1 id="QPointer-解析：侵入式弱引用机制与-Qt-对象生命周期监控"><a href="#QPointer-解析：侵入式弱引用机制与-Qt-对象生命周期监控" class="headerlink" title="QPointer 解析：侵入式弱引用机制与 Qt 对象生命周期监控"></a>QPointer 解析：侵入式弱引用机制与 Qt 对象生命周期监控</h1><p>在 Qt 框架下进行 C++ 开发时，裸指针（raw pointer）管理 <code>QObject</code> 派生类对象存在固有的生命周期脆弱性。由于 Qt 对象树（Object Tree）机制允许父对象在析构时递归销毁子对象，开发者往往难以静态追踪一个指针所指向的 GUI 控件或业务逻辑模块是否已被上层容器“连带销毁”。一旦访问已释放的内存，将触发未定义行为（Undefined Behavior），在堆内存复用后往往表现为随机崩溃。</p>
+<p>QPointer 是 Qt 提供的一种<strong>侵入式弱引用智能指针</strong>，专门用于解决上述悬空指针（dangling pointer）问题。它不持有对象所有权，但能在目标 <code>QObject</code> 销毁时<strong>同步、确定性地</strong>将自身置为 <code>nullptr</code>，从而将运行时的非法访问转化为可被安全拦截的空指针判异（null check）。</p>
+<hr>
+<h2 id="一、QPointer常见场景"><a href="#一、QPointer常见场景" class="headerlink" title="一、QPointer常见场景"></a>一、QPointer常见场景</h2><p>裸指针在对象销毁后不自动失效，这是悬空指针产生的根源。典型反例：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QLabel <span class="token operator">*</span>label <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">QLabel</span><span class="token punctuation">(</span><span class="token string">"Hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">delete</span> label<span class="token punctuation">;</span>          <span class="token comment">// 对象析构，堆内存归还 allocator</span>
+label<span class="token operator">-&gt;</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"World"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 未定义行为：绝大多数情况下直接崩溃（访问已释放的虚表或成员）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>即便开发者尽力规避显式 <code>delete</code>，Qt 的对象树机制也在后台默默执行析构。例如，将 <code>QLabel</code> 添加到 <code>QTabWidget</code> 后，用户关闭标签页时，该 <code>QLabel</code> 会被父控件自动 <code>delete</code>，而外部持有的裸指针对此一无所知。</p>
+<p>QPointer 正是为解决这一痛点而生：它会在所指向的 QObject 被销毁时，<strong>自动将自己置为 nullptr</strong>，让你可以安全地检查指针是否有效。</p>
+<blockquote>
+<p>QPointer通过<strong>观察者模式</strong>与 <strong><code>QObject</code> 内建通知机制</strong>的结合，从根本上解决了“对象已死，指针不知”的信息不对称问题。</p>
 </blockquote>
-</li>
-</ul>
-<h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h2><p>CMake是一个项目构建工具，开发者可指定整个工程的编译流程，CMake会根据编译平台自动生成本地化的Makefile和工程文件，最后用户只需make编译即可。<br>具体流程：<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/CMake%E6%B5%81%E7%A8%8B.jpg?raw=true"></p>
+<p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/QPointer%20%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90_1.png?raw=true" alt="Qpointer生命周期"></p>
+<hr>
+<h2 id="二、QPointer-的概述"><a href="#二、QPointer-的概述" class="headerlink" title="二、QPointer 的概述"></a>二、QPointer 的概述</h2><p><code>QPointer&lt;T&gt;</code> 是 QtCore 模块提供的模板类，其模板参数 <code>T</code> 必须静态继承自 <code>QObject</code>（编译期通过 <code>static_assert</code> 强制检查）。它本质上是一个<strong>弱引用</strong>——不参与对象的生命周期管理（不控制对象何时删除），但能告诉你对象是否还存在。</p>
+<p>核心特征：</p>
 <ul>
-<li>跨平台</li>
-<li>可管理大型项目</li>
-<li>简化编译构建过程&amp;编译过程</li>
-<li>可扩展：通过编写cmake特定功能的模块，扩充cmake功能</li>
+<li>只能指向继承自 QObject 的类（编译期检查，不合法会 static_assert 报错）；</li>
+<li>当指向的对象被销毁时，QPointer 自动变为 nullptr，无需手动置空；</li>
+<li>本身不拥有对象所有权，不影响对象的删除时机，也没有引用计数开销。</li>
 </ul>
+<hr>
+<h2 id="三、基本用法"><a href="#三、基本用法" class="headerlink" title="三、基本用法"></a>三、基本用法</h2><h3 id="3-1-构造与状态初始化"><a href="#3-1-构造与状态初始化" class="headerlink" title="3.1 构造与状态初始化"></a>3.1 构造与状态初始化</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;QPointer&gt;</span></span>
+
+QPointer<span class="token operator">&lt;</span>QLabel<span class="token operator">&gt;</span> ptr1<span class="token punctuation">;</span>                     <span class="token comment">// 默认构造，isNull() == true</span>
+QPointer<span class="token operator">&lt;</span>QLabel<span class="token operator">&gt;</span> ptr2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">QLabel</span><span class="token punctuation">(</span><span class="token string">"Text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 直接new</span>
+QLabel <span class="token operator">*</span>raw <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">QLabel</span><span class="token punctuation">(</span><span class="token string">"Raw"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+QPointer<span class="token operator">&lt;</span>QLabel<span class="token operator">&gt;</span> ptr3 <span class="token operator">=</span> raw<span class="token punctuation">;</span>               <span class="token comment">// 从裸指针构造</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-2-赋值与比较"><a href="#3-2-赋值与比较" class="headerlink" title="3.2 赋值与比较"></a>3.2 赋值与比较</h3><p>QPointer 支持与裸指针之间的赋值和比较：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QLabel <span class="token operator">*</span>raw <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">QLabel</span><span class="token punctuation">(</span><span class="token string">"Test"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+QPointer<span class="token operator">&lt;</span>QLabel<span class="token operator">&gt;</span> ptr <span class="token operator">=</span> raw<span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>ptr <span class="token operator">==</span> raw<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">/* ... */</span> <span class="token punctuation">}</span>  <span class="token comment">// 比较</span>
+ptr <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>                 <span class="token comment">// 置空</span>
+ptr <span class="token operator">=</span> anotherRaw<span class="token punctuation">;</span>              <span class="token comment">// 指向另一个对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-3-判空与解引用"><a href="#3-3-判空与解引用" class="headerlink" title="3.3 判空与解引用"></a>3.3 判空与解引用</h3><p><code>QPointer</code> 重载了 <code>operator bool()</code> 和 <code>operator!()</code>，并提供 <code>isNull()</code> 方法。访问目标对象需通过 <code>operator-&gt;()</code> 或 <code>data()</code>：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QPointer<span class="token operator">&lt;</span>QLabel<span class="token operator">&gt;</span> ptr2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">QLabel</span><span class="token punctuation">(</span><span class="token string">"Text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ptr2<span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    ptr2<span class="token operator">-&gt;</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"Updated"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// operator-&gt; 返回 T*</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">auto</span> <span class="token operator">*</span>rawPtr <span class="token operator">=</span> ptr2<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 获取裸指针，谨慎使用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><strong>注意</strong>：QPointer 只解决”知不知道是野指针”的问题，访问前仍务必判空——判空失败时的访问与直接解引用悬空指针没有任何区别。</p>
+</blockquote>
+<hr>
+<h2 id="四、典型应用"><a href="#四、典型应用" class="headerlink" title="四、典型应用"></a>四、典型应用</h2><h3 id="4-1-UI-控件缓存（跨生命周期监控）"><a href="#4-1-UI-控件缓存（跨生命周期监控）" class="headerlink" title="4.1 UI 控件缓存（跨生命周期监控）"></a>4.1 UI 控件缓存（跨生命周期监控）</h3><p>在复杂窗口中，子控件可能因布局重构（如 <code>QLayout</code> 删除 <code>widget</code>）而被销毁。使用 QPointer 缓存这些控件，可安全地延迟访问：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">MainWindow</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">QWidget</span></span> <span class="token punctuation">{</span>
+    QPointer<span class="token operator">&lt;</span>QLabel<span class="token operator">&gt;</span> m_statusLabel<span class="token punctuation">;</span>             <span class="token comment">//可能随布局改变被删除</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">refreshStatus</span><span class="token punctuation">(</span><span class="token keyword">const</span> QString <span class="token operator">&amp;</span>text<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_statusLabel<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+            m_statusLabel<span class="token operator">-&gt;</span><span class="token function">setText</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-2-异步回调中的安全捕获（Lambda-生命周期隔离）"><a href="#4-2-异步回调中的安全捕获（Lambda-生命周期隔离）" class="headerlink" title="4.2 异步回调中的安全捕获（Lambda 生命周期隔离）"></a>4.2 异步回调中的安全捕获（Lambda 生命周期隔离）</h3><p>当进行异步任务（如网络请求、定时器回调）时，<code>this</code> 指针可能在回调触发前被销毁。捕获 <code>QPointer&lt;T&gt;</code> 而非裸指针是标准防御性做法：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">QPointer<span class="token operator">&lt;</span>QNetworkReply<span class="token operator">&gt;</span> reply <span class="token operator">=</span> manager<span class="token operator">-&gt;</span><span class="token function">get</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">connect</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> <span class="token operator">&amp;</span>QNetworkReply<span class="token double-colon punctuation">::</span>finished<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>reply<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 若对象已销毁，reply 为空；若存活，则安全访问。</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>reply<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        <span class="token function">processData</span><span class="token punctuation">(</span>reply<span class="token operator">-&gt;</span><span class="token function">readAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/QPointer%E5%BC%82%E6%AD%A5%E5%9B%9E%E8%B0%83.png?raw=true"></p>
+<h3 id="4-3-观察者模式与事件过滤器"><a href="#4-3-观察者模式与事件过滤器" class="headerlink" title="4.3 观察者模式与事件过滤器"></a>4.3 观察者模式与事件过滤器</h3><p>当在一个长生命周期对象中观测另一个临时对象时，使用 QPointer 替代裸成员变量，可避免在观测者中被调用时访问野指针。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Observer</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">QObject</span></span> <span class="token punctuation">{</span>
+    QPointer<span class="token operator">&lt;</span>QObject<span class="token operator">&gt;</span> m_subject<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">setSubject</span><span class="token punctuation">(</span>QObject <span class="token operator">*</span>subject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        m_subject <span class="token operator">=</span> subject<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>m_subject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 安全操作</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-4-缓存工厂生产的对象"><a href="#4-4-缓存工厂生产的对象" class="headerlink" title="4.4 缓存工厂生产的对象"></a>4.4 缓存工厂生产的对象</h3><p>当通过工厂模式创建对象，且对象可能被外部代码删除时，工厂可以用 QPointer 维护弱引用，追踪对象是否还活着，避免重复创建或访问失效缓存。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>QPointer</code> 是 Qt 元对象系统（Meta-Object System）在内存安全层面提供的基础设施组件。它利用 <code>QObject</code> 内置的侵入式观察者链表，以近乎零额外内存开销的代价，实现了确定性、同步性的野指针防御。</p>
 
                 
             </div>
@@ -552,7 +626,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://NTGarfield.github.io/2025/10/06/cmake/">https://NTGarfield.github.io/2025/10/06/cmake/</a>
+                    <a href="https://NTGarfield.github.io/2026/07/28/qpointer-jie-xi/">https://NTGarfield.github.io/2026/07/28/qpointer-jie-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -590,8 +664,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CMake/">
-                                    <span class="chip bg-color">CMake</span>
+                                <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">软件开发</span>
+                                </a>
+                            
+                                <a href="/tags/Qt/">
+                                    <span class="chip bg-color">Qt</span>
                                 </a>
                             
                         </div>
@@ -670,29 +748,83 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/10/07/freertos-xue-xi-yi/">
+                <a href="/2026/07/28/qpointer-jie-xi/">
                     <div class="card-image">
                         
+                        <img src="https://github.com/NTGarfield/MyPic/blob/img/text/Qt%E5%B0%81%E9%9D%A2.png?raw=true" class="responsive-img" alt="QPointer 解析">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="FreeRTOS学习（一）">
-                        
-                        <span class="card-title">FreeRTOS学习（一）</span>
+                        <span class="card-title">QPointer 解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            FreeRTOS初识
+                            QPointer
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-07
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-07-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="post-category">
+                                    软件开发
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">软件开发</span>
+                    </a>
+                    
+                    <a href="/tags/Qt/">
+                        <span class="chip bg-color">Qt</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/10/12/freertos-xue-xi-si/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="FreeRTOS学习（四）">
+                        
+                        <span class="card-title">FreeRTOS学习（四）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            FreeRTOS空闲任务
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -718,55 +850,6 @@
                     
                     <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
                         <span class="chip bg-color">嵌入式软件</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/10/05/ying-jian-ji-chu-yi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="硬件基础（一）">
-                        
-                        <span class="card-title">硬件基础（一）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            常见器件及其特性
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-05
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6/" class="post-category">
-                                    嵌入式硬件
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6/">
-                        <span class="chip bg-color">嵌入式硬件</span>
                     </a>
                     
                 </div>
