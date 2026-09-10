@@ -579,7 +579,7 @@
 ~x = -6<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>因为：<br>$$-5 - 1 = -6$$</p>
-<p>这些恒等式也是 <code>x &amp; -x</code> 能够提取最低位 <code>1</code> 的基础。</p>
+<p>这些恒等式也是 <code>x &amp; -x</code> 能够提取最低位 <code>1</code> 的基础。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_%E8%A1%A5%E7%A0%81%E6%8E%A8%E5%AF%BC.png?raw=true" alt="图1：补码推导"></p>
 <blockquote>
 <p><strong>工程提醒</strong></p>
 <p>在 C/C++ 中，涉及有符号整数溢出时不能只依赖“硬件补码一定怎么运行”的直觉。<br>纯粹进行位模式运算时，优先考虑使用 <code>uint32_t</code>、<code>uint64_t</code> 等无符号定宽整数。</p>
@@ -603,7 +603,7 @@ x <span class="token operator">&gt;&gt;</span> <span class="token number">1</spa
 <ul>
 <li>位字段、协议字段、掩码运算优先使用无符号类型；</li>
 <li>如果依赖有符号右移行为，应确认编译器和目标平台约定；</li>
-<li>不要默认把 <code>x &gt;&gt; k</code> 当成所有情况下的 <code>x / 2^k</code>。</li>
+<li>不要默认把 <code>x &gt;&gt; k</code> 当成所有情况下的 <code>x / 2^k</code>。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_%E7%AE%97%E6%9C%AF%E5%8F%B3%E7%A7%BB%E4%B8%8E%E9%80%BB%E8%BE%91%E5%8F%B3%E7%A7%BB.png?raw=true" alt="图2 算术右移与逻辑右移对比"></li>
 </ul>
 <hr>
 <h2 id="二、六种基本位运算：规则与工程含义"><a href="#二、六种基本位运算：规则与工程含义" class="headerlink" title="二、六种基本位运算：规则与工程含义"></a>二、六种基本位运算：规则与工程含义</h2><p>按位逻辑运算本质上是对每一个 bit 单独应用布尔运算。</p>
@@ -718,7 +718,8 @@ b3 b2 b1 b0<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 
     <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>时间复杂度：$O(n)$<br>额外空间：$O(1)$</p>
+<p>时间复杂度：$O(n)$</p>
+<p>额外空间：$O(1)$<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_%E5%BC%82%E6%88%96%E6%88%90%E5%AF%B9%E6%B6%88%E9%99%A4.png?raw=true" alt="图3 异或成对消除过程"></p>
 <hr>
 <h3 id="3-3-推论-2：异或两次等于没操作"><a href="#3-3-推论-2：异或两次等于没操作" class="headerlink" title="3.3 推论 2：异或两次等于没操作"></a>3.3 推论 2：异或两次等于没操作</h3><p>因为：$b \oplus b = 0$<br>所以：$(a\oplus b)\oplus b = a$</p>
 <p>对应代码：</p>
@@ -753,7 +754,7 @@ x&amp;(x - 1) = 1010000<span aria-hidden="true" class="line-numbers-rows"><span>
 
 <p>因此：</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">x <span class="token operator">&amp;=</span> x <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>每执行一次就会清除最低位的一个 <code>1</code>。</p>
+<p>每执行一次就会清除最低位的一个 <code>1</code>。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_x%E4%B8%8Ex%E5%87%8F1.png?raw=true" alt="图4 x &amp; (x-1) 清除最低位的 1"></p>
 <hr>
 <h4 id="应用-1：统计-1-的个数"><a href="#应用-1：统计-1-的个数" class="headerlink" title="应用 1：统计 1 的个数"></a>应用 1：统计 1 的个数</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
 
@@ -802,9 +803,7 @@ bool <span class="token function">isPowerOfTwo</span><span class="token punctuat
 -x     = 10101000
 x &amp; -x = 00001000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>结果正好是：$2^k$</p>
-<hr>
-<h4 id="工程实现：优先使用-unsigned"><a href="#工程实现：优先使用-unsigned" class="headerlink" title="工程实现：优先使用 unsigned"></a>工程实现：优先使用 unsigned</h4><p>算法书里经常写：</p>
+<h2 id="结果正好是：-2-k"><a href="#结果正好是：-2-k" class="headerlink" title="结果正好是：$2^k$"></a>结果正好是：$2^k$<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_lowbit%E6%8F%90%E5%8F%96.png?raw=true" alt="图5 x &amp; -x 提取 lowbit"></h2><h4 id="工程实现：优先使用-unsigned"><a href="#工程实现：优先使用-unsigned" class="headerlink" title="工程实现：优先使用 unsigned"></a>工程实现：优先使用 unsigned</h4><p>算法书里经常写：</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">lowbit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
     <span class="token keyword">return</span> x <span class="token operator">&amp;</span> <span class="token operator">-</span>x<span class="token punctuation">;</span>
@@ -885,8 +884,7 @@ x &amp; -x = 00001000<span aria-hidden="true" class="line-numbers-rows"><span></
     <span class="token keyword">return</span> a<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>这个算法与数字逻辑中的半加器 / 全加器思想高度一致。</p>
-<p>但要注意：</p>
+<p>这个算法与数字逻辑中的半加器 / 全加器思想高度一致。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_%E4%BD%8D%E8%BF%90%E7%AE%97%E5%8A%A0%E6%B3%95%E5%99%A8.png?raw=true" alt="图6 位运算模拟加法的迭代过程"><br>但要注意：</p>
 <blockquote>
 <p>这是理解加法器和位逻辑关系的好例子，并不是说软件里应该用它替代普通 <code>a + b</code>。</p>
 </blockquote>
@@ -1010,7 +1008,7 @@ perm <span class="token operator">&amp;=</span> <span class="token operator">~</
 
 <p>这就是典型的：</p>
 <blockquote>
-<p><strong>Read-Modify-Write（读-改-写）</strong></p>
+<p><strong>Read-Modify-Write（读-改-写）</strong><br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BD%8D%E8%BF%90%E7%AE%97_%E5%AF%84%E5%AD%98%E5%99%A8%E8%AF%BB%E6%94%B9%E5%86%99.png?raw=true" alt="图7 寄存器位字段与 Read-Modify-Write"></p>
 </blockquote>
 <hr>
 <h4 id="提取多-bit-字段"><a href="#提取多-bit-字段" class="headerlink" title="提取多 bit 字段"></a>提取多 bit 字段</h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token class-name">uint32_t</span> mode <span class="token operator">=</span> <span class="token punctuation">(</span>REG <span class="token operator">&amp;</span> CTRL_MODE_Msk<span class="token punctuation">)</span> <span class="token operator">&gt;&gt;</span> CTRL_MODE_Pos<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
