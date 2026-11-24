@@ -1,0 +1,1548 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="FreeRTOS学习（二）, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="FreeRTOS任务相关概念">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>FreeRTOS学习（二） | NTGafield</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+    <!-- Prism.js 样式 -->
+     <link rel="stylesheet" href="/libs/prism/prism.css">
+
+     <link rel="stylesheet" href="/css/my.css?v=1">
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<!--20250730-->
+
+<!--20250730-->
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">NTGafield</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-file-lines" style="zoom: 0.6;"></i>
+      
+      <span>文章</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/hardware">
+          
+          <i class="fas fa-gears" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>嵌入式硬件</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/software">
+          
+          <i class="fas fa-microchip" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>嵌入式软件</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">NTGafield</div>
+        <div class="logo-desc">
+            
+            我理解一切|因为我是一切|夜晚|暗影|生命|静默|平和|以及爱
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-file-lines"></i>
+			
+			文章
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/hardware " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gears" style="position: absolute;left:50px" ></i>
+			      
+		          <span>嵌入式硬件</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/software " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-microchip" style="position: absolute;left:50px" ></i>
+			      
+		          <span>嵌入式软件</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/NTGarfield" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/NTGarfield" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">FreeRTOS学习（二）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/FreeRTOS/">
+                                <span class="chip bg-color">FreeRTOS</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                                <span class="chip bg-color">嵌入式软件</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                嵌入式软件
+                            </a>
+                        
+                            <a href="/categories/RTOS/" class="post-category">
+                                RTOS
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-09-10
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    8 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        <!--
+         是否加载使用自带的 prismjs.
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+         -->
+
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="任务创建"><a href="#任务创建" class="headerlink" title="任务创建"></a>任务创建</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+<th>动态/静态</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>xTaskCreate</strong></td>
+<td>动态创建任务</td>
+<td>动态</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>xTaskCreateStatic</strong></td>
+<td>静态创建任务</td>
+<td>静态</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>xTaskCreateRestrictedStatic</strong></td>
+<td>静态创建受限任务(权限控制)</td>
+<td>静态</td>
+<td>很少用</td>
+</tr>
+</tbody></table>
+<h4 id="xTaskCreate-动态创建任务"><a href="#xTaskCreate-动态创建任务" class="headerlink" title="xTaskCreate-动态创建任务"></a>xTaskCreate-动态创建任务</h4><blockquote>
+<p>为使本函数可用，宏 <strong>configSUPPORT_DYNAMIC_ALLOCATION</strong> 必须在 <strong>FreeRTOSConfig.h</strong> 中设为 1，或保持未定义状态（默认启用动态内存分配）。</p>
+</blockquote>
+<h5 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h5><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/xTaskCreat()%20function%20prototype.png?raw=true"></p>
+<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><ul>
+<li>创建一个新的任务实例。</li>
+<li>每个任务都需要一定的 RAM 空间，用于保存任务状态（即任务控制块，Task Control Block，简称 TCB）以及任务运行所需的栈空间。</li>
+<li>如果使用 xTaskCreate() 创建任务，则所需的 RAM 将自动从 FreeRTOS 的堆（heap）中分配。</li>
+<li>若使用 xTaskCreateStatic() 创建任务，则 RAM 由应用程序编写者自行提供。此时函数会多出两个额外的参数，用于传入静态分配的内存区域，以便在编译时即完成内存分配。</li>
+<li>新创建的任务初始状态为 Ready（就绪态），但如果当前没有更高优先级的任务可运行，则该任务会立即进入 Running（运行态）。</li>
+<li>任务既可以在调度器（scheduler）启动之前创建，也可以在调度器启动之后创建。<br><img src="https://github.com/NTGarfield/MyPic/blob/img/text/%E4%BB%BB%E5%8A%A1%E7%9A%84%E7%8A%B6%E6%80%81.jpg?raw=true"></li>
+</ul>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pvTaskCode</td>
+<td>指向任务函数的指针，用于指定任务所执行的函数体</td>
+</tr>
+<tr>
+<td>pcName</td>
+<td>任务的描述性名称，自定义</td>
+</tr>
+<tr>
+<td>usStackDepth</td>
+<td>任务所需的栈大小(由内核分配)</td>
+</tr>
+<tr>
+<td>pvParameters</td>
+<td>传递给任务函数的参数</td>
+</tr>
+<tr>
+<td>uxPriority</td>
+<td>定义任务的执行优先级</td>
+</tr>
+<tr>
+<td>pxCreatedTask</td>
+<td>用于输出所创建任务的句柄</td>
+</tr>
+</tbody></table>
+<ul>
+<li>pvTaskCode：<ul>
+<li>任务本质上是一个不会退出的 C 函数，通常以无限循环的形式实现。</li>
+<li>pvTaskCode 参数是指向该函数的指针（实质上就是函数名本身），用于指定任务所执行的函数体。</li>
+</ul>
+</li>
+<li>pcName：<ul>
+<li>任务的描述性名称。该名称主要用于调试，也可以在调用 xTaskGetHandle() 时用于根据名称获取任务句柄。</li>
+<li>用户可在应用配置中通过常量 configMAX_TASK_NAME_LEN 定义任务名称的最大长度（以字符数计），该长度包含字符串结束符 NULL (‘\0’)。若提供的任务名称字符串长度超过此最大值，超出部分将被自动截断而不会产生警告。</li>
+</ul>
+</li>
+<li>usStackDepth：<ul>
+<li>每个任务都有其<strong>独立的栈空间</strong>，该栈由<strong>内核在任务创建时分配</strong>。usStackDepth 参数用于告诉内核任务所需的栈大小。</li>
+<li>该参数的值表示栈可容纳的字（word）数量，而非字节数。例如，在字长为 4 字节的架构上，若 usStackDepth 传入 100，则实际分配的栈空间为 400 字节（100 × 4 字节）。栈深度与字长的乘积不得超过 size_t 类型所能表示的最大值。</li>
+<li>空闲任务（Idle Task）所使用的栈大小由应用定义常量 configMINIMAL_STACK_SIZE 指定。该常量在 FreeRTOS 提供的示例工程中为特定微控制器架构设置了推荐的最小栈深度。若任务执行过程中需要较多的栈空间，则应为 usStackDepth 分配更大的值。</li>
+</ul>
+</li>
+<li>pvParameters：<ul>
+<li>任务函数可接收一个类型为 void*（指向任意类型的指针） 的参数。在创建任务时传入的 pvParameters 值将作为参数传递给任务函数。此参数采用 void* 类型，是为了允许任务以通用方式接收任意类型的数据。</li>
+<li>用户可在创建任务时将不同类型的数据通过<strong>强制类型转换</strong>为 void* 传入，在任务函数内部再将其转换回原始类型以使用。例如，可在创建任务时将一个整型变量转换为 void* 传入：<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">xTaskCreate</span><span class="token punctuation">(</span>TaskFunc<span class="token punctuation">,</span> <span class="token string">"TaskA"</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>myInt<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+而在任务函数内部再将其还原为整型：<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> value <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>pvParameters<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+</li>
+<li>uxPriority：<ul>
+<li>定义任务的执行优先级。<strong>值越小，优先级越低</strong></li>
+<li>任务优先级的取值范围为 0（最低优先级）到 (configMAX_PRIORITIES – 1)（最高优先级）。configMAX_PRIORITIES 是用户自定义的常量。</li>
+<li>当 configUSE_PORT_OPTIMISED_TASK_SELECTION 设为 0 时，系统在理论上对可用优先级的数量没有上限（仅受数据类型与 MCU 可用 RAM 的限制）。然而，出于内存效率考虑，建议仅定义实际所需的最少数量的优先级，以避免浪费 RAM。</li>
+<li>若传入的 uxPriority 值超过 (configMAX_PRIORITIES – 1)，系统将自动将其截断至最大允许值，而不会产生错误提示。</li>
+</ul>
+</li>
+<li>pxCreatedTask<ul>
+<li>pxCreatedTask 用于输出所创建任务的句柄（task handle）。</li>
+<li>该句柄可在后续的 API 调用中用于引用该任务，例如：<ul>
+<li>修改任务优先级；</li>
+<li>挂起或恢复任务；</li>
+<li>删除任务等。</li>
+</ul>
+</li>
+<li>若应用程序不需要使用任务句柄，可将 pxCreatedTask 设为 NULL。</li>
+</ul>
+</li>
+</ul>
+<h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pdPASS</td>
+<td>表示任务已成功创建</td>
+</tr>
+<tr>
+<td>errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY</td>
+<td>FreeRTOS 堆内存不足，任务创建失败</td>
+</tr>
+</tbody></table>
+<ul>
+<li>errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY：<ul>
+<li>表示任务创建失败，原因是 FreeRTOS 堆内存不足，无法为任务的数据结构和栈分配所需空间。</li>
+<li>如果工程中包含 heap_1.c、heap_2.c 或 heap_4.c，则可用堆空间的总量由 FreeRTOSConfig.h 中的宏 configTOTAL_HEAP_SIZE 定义。当内存分配失败时，可通过 vApplicationMallocFailedHook() 回调函数（即“钩子函数”）捕获该错误。剩余可用堆空间的大小可通过 xPortGetFreeHeapSize() API 函数查询。</li>
+<li>若工程中使用 heap_3.c，则堆空间大小由链接器配置（linker configuration）决定。</li>
+</ul>
+</li>
+</ul>
+<h4 id="xTaskCreateStatic-静态创建任务"><a href="#xTaskCreateStatic-静态创建任务" class="headerlink" title="xTaskCreateStatic-静态创建任务"></a>xTaskCreateStatic-静态创建任务</h4><blockquote>
+<p>要使该函数可用，必须在 FreeRTOSConfig.h 中将宏configSUPPORT_STATIC_ALLOCATION 设为 1。</p>
+</blockquote>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/xTaskCreateStatic()%20function%20prototype.png?raw=true"></p>
+<h5 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h5><ul>
+<li>创建一个新的任务实例。</li>
+<li>如果使用 xTaskCreate() 创建任务，则所需的 RAM 将自动从 FreeRTOS 的堆（heap）中分配。</li>
+<li>若使用 xTaskCreateStatic() 创建任务，则 RAM 由应用程序编写者显式提供。此方式会在函数中增加两个额外的参数，但允许在编译阶段进行静态内存分配。</li>
+<li>手动提供任务栈和任务控制块（TCB），避免动态内存分配。</li>
+</ul>
+<h5 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pvTaskCode</td>
+<td>指向任务函数的指针，用于指定任务所执行的函数体</td>
+</tr>
+<tr>
+<td>pcName</td>
+<td>任务的描述性名称，自定义</td>
+</tr>
+<tr>
+<td>ulStackDepth</td>
+<td>任务栈大小（以字为单位）</td>
+</tr>
+<tr>
+<td>pvParameters</td>
+<td>传递给任务函数的参数</td>
+</tr>
+<tr>
+<td>uxPriority</td>
+<td>定义任务的执行优先级</td>
+</tr>
+<tr>
+<td>puxStackBuffer</td>
+<td>指向任务栈缓冲区的指针（由用户提供）</td>
+</tr>
+<tr>
+<td>pxTaskBuffer</td>
+<td>指向任务控制块的缓冲区（由用户提供）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>puxStackBuffer：<ul>
+<li>参数用于向 xTaskCreateStatic() 传递一个 StackType_t 类型数组。ulStackDepth 必须被设置为该数组中元素（索引）的数量。</li>
+<li>换言之，ulStackDepth 定义了任务栈的深度（以“字”为单位），而 puxStackBuffer 则提供了实际的静态栈空间。</li>
+</ul>
+</li>
+<li>puxStackBuffer：<ul>
+<li>必须指向一个 <strong>StackType_t</strong> 类型数组，该数组的长度至少应包含 ulStackDepth 个元素（参见上文的 ulStackDepth 参数说明）。</li>
+<li>该数组将被用作所创建任务的栈空间（stack），因此必须是<strong>持久存在</strong>(persistent)的内存区域。换言之，不能在函数的栈帧（stack frame）中声明该数组，也不能使用在程序执行过程中可能被合法覆盖的其他内存区域。</li>
+</ul>
+</li>
+<li>pxTaskBuffer：<ul>
+<li>必须指向一个 <strong>StaticTask_t</strong> 类型的变量。</li>
+<li>该变量将用于保存任务的数据结构（TCB，Task Control Block），因此同样必须是<strong>持久存在</strong>的内存区域。同样地，pxTaskBuffer 不能定义在函数栈帧内部，也不能位于任何在程序运行过程中可能被系统或用户逻辑覆盖的内存空间中。</li>
+</ul>
+</li>
+</ul>
+<h5 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h5><table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NULL</td>
+<td>任务创建失败</td>
+</tr>
+<tr>
+<td>任意非 NULL 值</td>
+<td>任务已成功创建，返回值即为该任务的任务句柄</td>
+</tr>
+</tbody></table>
+<ul>
+<li>NULL：任务创建失败。原因是 puxStackBuffer 或 pxTaskBuffer 为 NULL。</li>
+<li>任意非 NULL 值：若返回值为非 NULL，则任务已成功创建，返回值即为该任务的任务句柄（Task Handle）。</li>
+</ul>
+<h2 id="任务删除"><a href="#任务删除" class="headerlink" title="任务删除"></a>任务删除</h2><h3 id="vTaskDelete"><a href="#vTaskDelete" class="headerlink" title="vTaskDelete()"></a>vTaskDelete()</h3><h4 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h4><p><img src="https://github.com/NTGarfield/MyPic/blob/img/text/vTaskDelete()%20function%20prototype.png?raw=true"></p>
+<h4 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h4><ul>
+<li>删除一个通过 <strong>xTaskCreate()</strong> 或 <strong>xTaskCreateStatic()</strong> 创建的任务实例。</li>
+<li>被删除的任务不再存在，因此无法进入 Running（运行）状态。</li>
+<li>请勿尝试使用任务句柄（task handle）去引用已经被删除的任务。</li>
+<li>当一个任务被删除时，<strong>空闲任务（idle task）</strong> 负责释放该任务所占用的内存资源，包括任务栈（stack）和任务控制块（Task Control Block，TCB）。因此，当应用程序调用 vTaskDelete() API 函数时，必须确保空闲任务有足够的处理时间（即空闲任务必须被调度执行），否则无法完成这些内存的释放操作。</li>
+<li>仅由 内核（kernel） 为任务分配的内存会在任务被删除时自动释放。而任何由用户自行分配与任务相关的内存或资源（如动态分配的缓冲区等），必须在任务删除时由用户显式释放。</li>
+</ul>
+<h4 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pxTask</td>
+<td>任务句柄</td>
+</tr>
+</tbody></table>
+<ul>
+<li>pxTask：<ul>
+<li>表示被删除任务的句柄（即目标任务）。</li>
+<li>若要获取任务句柄，可在调用 xTaskCreate() 创建任务时，使用其参数 pxCreatedTask；或者使用 xTaskCreateStatic() 创建任务并保存其返回值；也可以通过任务名称调用 xTaskGetHandle() 来获取对应的任务句柄。</li>
+<li>任务也可以自我删除，此时在 vTaskDelete() 的参数中传入 NULL 即可（即用 NULL 代替有效的任务句柄）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="延时函数"><a href="#延时函数" class="headerlink" title="延时函数"></a>延时函数</h2><h3 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h3><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>vTaskDelay</strong></td>
+<td>相对延时</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>vTaskDelayUntil</strong></td>
+<td>绝对延时</td>
+<td></td>
+</tr>
+</tbody></table>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">NTGarfield</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://NTGarfield.github.io/2025/10/09/freertos-xue-xi-er/">https://NTGarfield.github.io/2025/10/09/freertos-xue-xi-er/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">NTGarfield</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/FreeRTOS/">
+                                    <span class="chip bg-color">FreeRTOS</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                                    <span class="chip bg-color">嵌入式软件</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/10/10/freertos-xue-xi-san/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="FreeRTOS学习（三）">
+                        
+                        <span class="card-title">FreeRTOS学习（三）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            FreeRTOS系统延时
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                    嵌入式软件
+                                </a>
+                            
+                            <a href="/categories/RTOS/" class="post-category">
+                                    RTOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">嵌入式软件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/10/07/freertos-xue-xi-yi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="FreeRTOS学习（一）">
+                        
+                        <span class="card-title">FreeRTOS学习（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            FreeRTOS初识
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/" class="post-category">
+                                    嵌入式软件
+                                </a>
+                            
+                            <a href="/categories/RTOS/" class="post-category">
+                                    RTOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/FreeRTOS/">
+                        <span class="chip bg-color">FreeRTOS</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E8%BD%AF%E4%BB%B6/">
+                        <span class="chip bg-color">嵌入式软件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: NTGafield<br />'
+            + '文章作者: NTGafield<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="402328846"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2025-2026</span>
+            
+            <a href="/about" target="_blank">NTGafield</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">21.7k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/NTGarfield" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2965596765@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=296596765" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 296596765" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+
+    <!-- Prism.js 脚本 -->
+<script src="/libs/prism/prism.js"></script>
+<script>Prism.highlightAll();</script>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
