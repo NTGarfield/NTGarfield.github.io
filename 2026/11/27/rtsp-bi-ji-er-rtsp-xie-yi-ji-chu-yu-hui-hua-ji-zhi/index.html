@@ -1,0 +1,1996 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="RTSP 笔记（二）：RTSP 协议基础与会话机制, 嵌入式/C/CPP/C#/WPF/MVVM/算法">
+    <meta name="description" content="RTSP 笔记（二）：RTSP 协议基础与会话机制1. 引言RTSP（Real Time Streaming Protocol，实时流传输协议） 是一种面向实时媒体会话控制的应用层协议。
+RTSP 的主要职责包括：
+
+获取媒体资源描述；
+协">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>RTSP 笔记（二）：RTSP 协议基础与会话机制 | NTGafield</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+    <!-- Prism.js 样式 -->
+     <link rel="stylesheet" href="/libs/prism/prism.css">
+
+     <link rel="stylesheet" href="/css/my.css?v=1">
+
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<!--20250730-->
+
+<!--20250730-->
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">NTGafield</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-file-lines" style="zoom: 0.6;"></i>
+      
+      <span>文章</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/hardware">
+          
+          <i class="fas fa-gears" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>嵌入式硬件</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/software">
+          
+          <i class="fas fa-microchip" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>嵌入式软件</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">NTGafield</div>
+        <div class="logo-desc">
+            
+            我理解一切|因为我是一切|夜晚|暗影|生命|静默|平和|以及爱
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-file-lines"></i>
+			
+			文章
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/hardware " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gears" style="position: absolute;left:50px" ></i>
+			      
+		          <span>嵌入式硬件</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/software " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-microchip" style="position: absolute;left:50px" ></i>
+			      
+		          <span>嵌入式软件</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/NTGarfield" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/NTGarfield" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">RTSP 笔记（二）：RTSP 协议基础与会话机制</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-11-27
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    17 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        <!--
+         是否加载使用自带的 prismjs.
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+         -->
+
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="RTSP-笔记（二）：RTSP-协议基础与会话机制"><a href="#RTSP-笔记（二）：RTSP-协议基础与会话机制" class="headerlink" title="RTSP 笔记（二）：RTSP 协议基础与会话机制"></a>RTSP 笔记（二）：RTSP 协议基础与会话机制</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><p><strong>RTSP（Real Time Streaming Protocol，实时流传输协议）</strong> 是一种面向实时媒体会话控制的应用层协议。</p>
+<p>RTSP 的主要职责包括：</p>
+<ul>
+<li>获取媒体资源描述；</li>
+<li>协商媒体传输参数；</li>
+<li>建立媒体会话；</li>
+<li>控制媒体播放状态；</li>
+<li>管理会话生命周期。</li>
+</ul>
+<p>RTSP 通常不直接承担音视频媒体数据本身的大规模传输。实际媒体数据通常由 <strong>RTP</strong> 等协议承载，RTSP 负责对这些媒体流进行控制。</p>
+<p>本文重点介绍 RTSP 的协议结构和会话机制，包括：</p>
+<ul>
+<li>RTSP Client 与 Server；</li>
+<li>RTSP URI；</li>
+<li>请求与响应报文；</li>
+<li>CSeq；</li>
+<li>Session；</li>
+<li>Transport；</li>
+<li>状态码；</li>
+<li>会话生命周期。</li>
+</ul>
+<h1 id="2-RTSP-协议定位"><a href="#2-RTSP-协议定位" class="headerlink" title="2. RTSP 协议定位"></a>2. RTSP 协议定位</h1><p>RTSP 属于应用层协议，其设计形式与 HTTP 存在一定相似性，采用文本形式的请求与响应消息。典型 RTSP 通信关系如下：</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_1.png?raw=true" alt="**RTSP 控制通道与媒体通道关系**" style="zoom:38%;">
+
+<p>其中：</p>
+<ul>
+<li>RTSP 用于媒体会话控制</li>
+<li>RTP 用于媒体数据传输</li>
+<li>RTCP 可用于媒体传输质量统计与同步</li>
+<li>SDP 常用于描述媒体会话参数</li>
+</ul>
+<p>RTSP 的核心对象并不是单个数据包，而是一个具有状态的媒体会话。</p>
+<h1 id="3-RTSP-Client-与-RTSP-Server"><a href="#3-RTSP-Client-与-RTSP-Server" class="headerlink" title="3. RTSP Client 与 RTSP Server"></a>3. RTSP Client 与 RTSP Server</h1><p>RTSP 通常采用客户端/服务器模型。</p>
+<h2 id="3-1-RTSP-Client"><a href="#3-1-RTSP-Client" class="headerlink" title="3.1 RTSP Client"></a>3.1 RTSP Client</h2><p>RTSP Client 通常负责主动发起请求，例如：</p>
+<ul>
+<li>查询服务器支持的功能</li>
+<li>请求媒体描述</li>
+<li>请求建立传输通道</li>
+<li>启动播放</li>
+<li>暂停播放</li>
+<li>结束媒体会话</li>
+</ul>
+<p>常见 RTSP Client 包括：</p>
+<ul>
+<li>媒体播放器</li>
+<li>视频监控客户端</li>
+<li>流媒体分析工具</li>
+<li>自定义音视频应用</li>
+</ul>
+<h2 id="3-2-RTSP-Server"><a href="#3-2-RTSP-Server" class="headerlink" title="3.2 RTSP Server"></a>3.2 RTSP Server</h2><p>RTSP Server 通常监听指定网络端口，并处理客户端发送的 RTSP 请求。主要职责包括：</p>
+<ul>
+<li>解析 RTSP 请求；</li>
+<li>返回媒体资源信息；</li>
+<li>管理 Session；</li>
+<li>协商 RTP 传输参数；</li>
+<li>控制媒体发送状态；</li>
+<li>管理多个客户端连接。</li>
+</ul>
+<p>RTSP 默认端口通常为 <code>554</code> 。实际系统中也可以配置其他端口。</p>
+<h1 id="4-RTSP-URI"><a href="#4-RTSP-URI" class="headerlink" title="4. RTSP URI"></a>4. RTSP URI</h1><p>RTSP 使用 URI 标识媒体资源。典型形式：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">rtsp<span class="token operator">:</span><span class="token comment">//example.com:554/media/video</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其结构可划分为：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scheme</td>
+<td><code>rtsp</code></td>
+<td>协议类型</td>
+</tr>
+<tr>
+<td>Host</td>
+<td><code>example.com</code></td>
+<td>RTSP Server 地址</td>
+</tr>
+<tr>
+<td>Port</td>
+<td><code>554</code></td>
+<td>RTSP 服务端口</td>
+</tr>
+<tr>
+<td>Path</td>
+<td><code>/media/video</code></td>
+<td>媒体资源路径</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">rtsp<span class="token operator">:</span><span class="token comment">//192.168.1.20/live/camera1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>表示访问：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Server<span class="token operator">:</span> <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.20</span>
+Resource<span class="token operator">:</span> <span class="token operator">/</span>live<span class="token operator">/</span>camera1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>URI 在后续 RTSP 请求中作为资源标识使用。</p>
+<h1 id="5-RTSP-报文结构"><a href="#5-RTSP-报文结构" class="headerlink" title="5. RTSP 报文结构"></a>5. RTSP 报文结构</h1><p>RTSP 使用文本形式的协议消息。其报文总体分为：</p>
+<ul>
+<li>Request</li>
+<li>Response</li>
+</ul>
+<h1 id="6-RTSP-Request"><a href="#6-RTSP-Request" class="headerlink" title="6. RTSP Request"></a>6. RTSP Request</h1><p>典型请求：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">DESCRIBE rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">2</span>
+Accept<span class="token operator">:</span> application<span class="token operator">/</span>sdp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>RTSP Request 通常包含三部分：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Request<span class="token operator">-</span>Line
+Headers
+
+Message Body<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中 Message Body 根据请求类型决定是否存在。</p>
+<h2 id="6-1-Request-Line"><a href="#6-1-Request-Line" class="headerlink" title="6.1 Request-Line"></a>6.1 Request-Line</h2><p>请求首行结构通常为：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">METHOD URI RTSP<span class="token operator">-</span>Version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">DESCRIBE rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>字段含义：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method</td>
+<td><code>DESCRIBE</code></td>
+</tr>
+<tr>
+<td>URI</td>
+<td><code>rtsp://example.com/media</code></td>
+</tr>
+<tr>
+<td>Version</td>
+<td><code>RTSP/1.0</code></td>
+</tr>
+</tbody></table>
+<p>Method 决定当前请求执行的操作。</p>
+<h1 id="7-RTSP-Response"><a href="#7-RTSP-Response" class="headerlink" title="7. RTSP Response"></a>7. RTSP Response</h1><p>服务器收到请求后返回响应。典型响应：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">RTSP<span class="token operator">/</span><span class="token number">1.0</span> <span class="token number">200</span> OK
+CSeq<span class="token operator">:</span> <span class="token number">2</span>
+Content<span class="token operator">-</span>Type<span class="token operator">:</span> application<span class="token operator">/</span>sdp
+Content<span class="token operator">-</span>Length<span class="token operator">:</span> <span class="token number">156</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>响应首行结构通常为 <code>RTSP-Version Status-Code Reason-Phrase</code> ，例如 <code>RTSP/1.0 200 OK</code> ，其中 <code>200</code> 表示请求处理成功。</p>
+<h1 id="8-RTSP-请求与响应对应关系"><a href="#8-RTSP-请求与响应对应关系" class="headerlink" title="8. RTSP 请求与响应对应关系"></a>8. RTSP 请求与响应对应关系</h1><p>RTSP 通信采用请求—响应模型。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Client<span class="token operator">:</span>
+
+DESCRIBE rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器返回：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">RTSP<span class="token operator">/</span><span class="token number">1.0</span> <span class="token number">200</span> OK
+CSeq<span class="token operator">:</span> <span class="token number">2</span>
+Content<span class="token operator">-</span>Type<span class="token operator">:</span> application<span class="token operator">/</span>sdp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>客户端通过 <code>CSeq</code> 判断响应对应的请求。</p>
+<h1 id="9-CSeq"><a href="#9-CSeq" class="headerlink" title="9. CSeq"></a>9. CSeq</h1><p><code>CSeq</code> 是 RTSP 中非常重要的头字段。典型形式：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">CSeq<span class="token operator">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>下一条请求：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">CSeq<span class="token operator">:</span> <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>再下一条：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">CSeq<span class="token operator">:</span> <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>CSeq 可以理解为：</p>
+<blockquote>
+<p>RTSP 请求的顺序编号。</p>
+</blockquote>
+<p>服务器响应通常返回相同的 CSeq。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Client                         Server
+CSeq<span class="token operator">:</span> <span class="token number">4</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> CSeq<span class="token operator">:</span> <span class="token number">4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>因此客户端可以建立以下对应关系：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Request CSeq <span class="token number">4</span>
+      ↕
+Response CSeq <span class="token number">4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="10-常见-RTSP-方法"><a href="#10-常见-RTSP-方法" class="headerlink" title="10. 常见 RTSP 方法"></a>10. 常见 RTSP 方法</h1><p>RTSP 定义了多种请求方法。常见方法包括：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>主要作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OPTIONS</td>
+<td>查询服务器支持的方法</td>
+</tr>
+<tr>
+<td>DESCRIBE</td>
+<td>获取媒体资源描述</td>
+</tr>
+<tr>
+<td>SETUP</td>
+<td>建立媒体传输参数</td>
+</tr>
+<tr>
+<td>PLAY</td>
+<td>开始或继续播放</td>
+</tr>
+<tr>
+<td>PAUSE</td>
+<td>暂停播放</td>
+</tr>
+<tr>
+<td>TEARDOWN</td>
+<td>终止会话</td>
+</tr>
+<tr>
+<td>GET_PARAMETER</td>
+<td>获取参数或保持会话</td>
+</tr>
+<tr>
+<td>SET_PARAMETER</td>
+<td>修改参数</td>
+</tr>
+</tbody></table>
+<p>其中典型播放流程主要涉及：<code>OPTIONS</code> <code>DESCRIBE</code> <code>SETUP</code> <code>PLAY</code> <code>TEARDOWN</code> 。下一篇将进一步详细分析这些方法及其交互时序。</p>
+<h1 id="11-OPTIONS"><a href="#11-OPTIONS" class="headerlink" title="11. OPTIONS"></a>11. OPTIONS</h1><p><code>OPTIONS</code>  用于查询服务器支持的 RTSP 方法。请求：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">OPTIONS rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>响应可能为：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">RTSP<span class="token operator">/</span><span class="token number">1.0</span> <span class="token number">200</span> OK
+CSeq<span class="token operator">:</span> <span class="token number">1</span>
+Public<span class="token operator">:</span> OPTIONS<span class="token punctuation">,</span> DESCRIBE<span class="token punctuation">,</span> SETUP<span class="token punctuation">,</span> PLAY<span class="token punctuation">,</span> PAUSE<span class="token punctuation">,</span> TEARDOWN<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>其中 <code>Public</code> 用于表示服务器支持的方法集合。<code>OPTIONS</code> 通常用于能力探测，但并非所有 RTSP 会话都必须首先发送 <code>OPTIONS</code> 。</p>
+<h1 id="12-DESCRIBE"><a href="#12-DESCRIBE" class="headerlink" title="12. DESCRIBE"></a>12. DESCRIBE</h1><p><code>DESCRIBE</code> 用于请求媒体资源的描述信息。典型请求：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">DESCRIBE rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">2</span>
+Accept<span class="token operator">:</span> application<span class="token operator">/</span>sdp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器可能返回：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">RTSP<span class="token operator">/</span><span class="token number">1.0</span> <span class="token number">200</span> OK
+CSeq<span class="token operator">:</span> <span class="token number">2</span>
+Content<span class="token operator">-</span>Type<span class="token operator">:</span> application<span class="token operator">/</span>sdp
+Content<span class="token operator">-</span>Length<span class="token operator">:</span> <span class="token number">200</span>
+
+v<span class="token operator">=</span><span class="token number">0</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+m<span class="token operator">=</span>video <span class="token number">0</span> RTP<span class="token operator">/</span>AVP <span class="token number">96</span>
+a<span class="token operator">=</span>rtpmap<span class="token operator">:</span><span class="token number">96</span> H264<span class="token operator">/</span><span class="token number">90000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>消息体通常为 SDP。因此 <code>DESCRIBE</code> 的基本作用可以概括为：</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_3.png?raw=true" style="zoom:38%;">
+
+<p>SDP 中可能包含：</p>
+<ul>
+<li>音视频轨道</li>
+<li>编码格式</li>
+<li>Payload Type</li>
+<li>RTP 时钟频率</li>
+<li>控制 URI</li>
+<li>媒体参数</li>
+</ul>
+<h1 id="13-SETUP"><a href="#13-SETUP" class="headerlink" title="13. SETUP"></a>13. SETUP</h1><p><code>SETUP</code> 用于协商具体媒体流的传输参数。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">SETUP rtsp<span class="token operator">:</span><span class="token comment">//example.com/media/track1 RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">3</span>
+Transport<span class="token operator">:</span> RTP<span class="token operator">/</span>AVP<span class="token punctuation">;</span>unicast<span class="token punctuation">;</span>client_port<span class="token operator">=</span><span class="token number">5000</span><span class="token operator">-</span><span class="token number">5001</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>其中最重要的字段为 <code>Transport</code> ，该字段用于协商：</p>
+<ul>
+<li>RTP 传输协议</li>
+<li>单播或组播</li>
+<li>UDP 或 TCP</li>
+<li>客户端端口</li>
+<li>服务器端口</li>
+<li>interleaved channel</li>
+<li>SSRC 等信息</li>
+</ul>
+<h1 id="14-Transport-头字段"><a href="#14-Transport-头字段" class="headerlink" title="14. Transport 头字段"></a>14. Transport 头字段</h1><p><code>Transport</code> 是 RTSP 中最关键的头字段之一。典型 UDP 配置：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Transport<span class="token operator">:</span> RTP<span class="token operator">/</span>AVP<span class="token punctuation">;</span>unicast<span class="token punctuation">;</span>client_port<span class="token operator">=</span><span class="token number">5000</span><span class="token operator">-</span><span class="token number">5001</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可以拆分为：</p>
+<ul>
+<li><code>RTP/AVP</code> 表示使用 RTP Audio/Video Profile。</li>
+<li><code>unicast</code> 表示采用单播。</li>
+<li><code>client_port=5000-5001</code> 通常表示客户端用于接收：</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token number">5000</span> → RTP
+<span class="token number">5001</span> → RTCP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>服务器响应可能为：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Transport<span class="token operator">:</span> RTP<span class="token operator">/</span>AVP<span class="token punctuation">;</span>unicast<span class="token punctuation">;</span>
+client_port<span class="token operator">=</span><span class="token number">5000</span><span class="token operator">-</span><span class="token number">5001</span><span class="token punctuation">;</span>
+server_port<span class="token operator">=</span><span class="token number">6000</span><span class="token operator">-</span><span class="token number">6001</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>表示：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Client RTP  <span class="token operator">:</span> <span class="token number">5000</span>
+Client RTCP <span class="token operator">:</span> <span class="token number">5001</span>
+
+Server RTP  <span class="token operator">:</span> <span class="token number">6000</span>
+Server RTCP <span class="token operator">:</span> <span class="token number">6001</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="15-Session"><a href="#15-Session" class="headerlink" title="15. Session"></a>15. Session</h1><p><code>SETUP</code> 成功后，服务器通常创建 RTSP Session。响应中可能包含：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>该 Session ID 用于标识当前 RTSP 会话。后续请求需要携带：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">PLAY rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">4</span>
+Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器可以据此判断 PLAY 操作属于哪个会话。</p>
+<h1 id="16-Session-与-TCP-Connection-的区别"><a href="#16-Session-与-TCP-Connection-的区别" class="headerlink" title="16. Session 与 TCP Connection 的区别"></a>16. Session 与 TCP Connection 的区别</h1><p>Session 与 TCP Connection 不是同一概念。TCP Connection 属于 <strong>传输层</strong> ：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Client IP<span class="token operator">:</span>Port
+        ↕
+Server IP<span class="token operator">:</span>Port<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>RTSP Session 属于 <strong>应用层</strong> ：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>二者之间没有简单的一一对应关系。一个 TCP 连接可能承载一个或多个 RTSP 操作，而 RTSP Session 的生命周期也不应简单等同于某个 TCP socket 的生命周期。因此：这一点在后续分析连接断开、会话超时和重连机制时非常重要。</p>
+<h1 id="17-PLAY"><a href="#17-PLAY" class="headerlink" title="17. PLAY"></a>17. PLAY</h1><p><code>PLAY</code> 用于启动媒体发送。典型请求：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">PLAY rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">4</span>
+Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器响应：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">RTSP<span class="token operator">/</span><span class="token number">1.0</span> <span class="token number">200</span> OK
+CSeq<span class="token operator">:</span> <span class="token number">4</span>
+Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>响应成功后，媒体服务器开始按照已经协商好的 Transport 参数发送媒体数据。</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_2.png?raw=true" alt="**SETUP 与 PLAY 的职责区别**" style="zoom:38%;">
+
+<p>这两个阶段必须区分。<code>SETUP</code> 负责配置媒体通道，<code>PLAY</code> 负责改变媒体会话状态。</p>
+<h1 id="18-PAUSE"><a href="#18-PAUSE" class="headerlink" title="18. PAUSE"></a>18. PAUSE</h1><p><code>PAUSE</code> 用于暂停当前媒体播放。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">PAUSE rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">5</span>
+Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>暂停通常不会立即销毁 Session。因此后续仍可以发送 <code>PLAY</code> 恢复媒体传输。</p>
+<h1 id="19-TEARDOWN"><a href="#19-TEARDOWN" class="headerlink" title="19. TEARDOWN"></a>19. TEARDOWN</h1><p><code>TEARDOWN</code> 用于终止 RTSP Session，并释放相关服务器资源。请求：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">TEARDOWN rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">6</span>
+Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器处理后通常：</p>
+<ul>
+<li>停止媒体发送</li>
+<li>释放 RTP/RTCP 资源</li>
+<li>删除 Session</li>
+<li>释放相关状态信息</li>
+</ul>
+<p>TEARDOWN 通常标志着一次 RTSP 会话的结束。</p>
+<h1 id="20-RTSP-会话生命周期"><a href="#20-RTSP-会话生命周期" class="headerlink" title="20. RTSP 会话生命周期"></a>20. RTSP 会话生命周期</h1><p>典型 RTSP 会话可以划分为以下阶段：</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_4.png?raw=true" alt="**RTSP 典型会话生命周期**" style="zoom:38%;">
+
+<p>实际 RTSP 状态模型根据协议版本和服务器实现可能存在差异，但核心思想是一致的：</p>
+<blockquote>
+<p>RTSP Session 是具有状态的</p>
+</blockquote>
+<p>这也是 RTSP 与简单无状态请求协议的重要区别之一。</p>
+<h1 id="21-RTSP-状态"><a href="#21-RTSP-状态" class="headerlink" title="21. RTSP 状态"></a>21. RTSP 状态</h1><p>从实现角度，RTSP Server 通常需要维护会话状态。常见状态可以抽象为 <code>INIT</code> <code>READY</code> <code>PLAYING</code> 。其典型转换关系：</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_5.png?raw=true" style="zoom:38%;">
+
+<p>TEARDOWN 可以从 READY 或 PLAYING 状态结束 Session。服务器需要根据当前状态判断请求是否合法。例如，如果尚未执行 SETUP，直接发送 PLAY</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">INIT
+  └── PLAY<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>服务器可能返回错误，因为媒体传输参数尚未建立。</p>
+<h1 id="22-RTSP-状态码"><a href="#22-RTSP-状态码" class="headerlink" title="22. RTSP 状态码"></a>22. RTSP 状态码</h1><p>RTSP 使用三位数字状态码表示请求处理结果。其设计与 HTTP 状态码形式相似。</p>
+<h2 id="22-1-2xx"><a href="#22-1-2xx" class="headerlink" title="22.1 2xx"></a>22.1 2xx</h2><p>表示请求成功。最常见：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">// 200 OK</span>
+RTSP<span class="token operator">/</span><span class="token number">1.0</span> <span class="token number">200</span> OK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="22-2-3xx"><a href="#22-2-3xx" class="headerlink" title="22.2 3xx"></a>22.2 3xx</h2><p>通常与资源重定向有关。实际支持情况取决于具体实现。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token number">301</span> Moved Permanently
+<span class="token number">302</span> Found<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="22-3-4xx"><a href="#22-3-4xx" class="headerlink" title="22.3 4xx"></a>22.3 4xx</h2><p>表示客户端请求存在问题。常见状态包括：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token number">400</span> Bad Request
+<span class="token number">401</span> Unauthorized
+<span class="token number">404</span> Not Found
+<span class="token number">405</span> Method Not Allowed
+<span class="token number">454</span> Session Not Found
+<span class="token number">461</span> Unsupported Transport<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中两个状态在 RTSP 调试中尤其常见：</p>
+<h3 id="454-Session-Not-Found"><a href="#454-Session-Not-Found" class="headerlink" title="454 Session Not Found"></a>454 Session Not Found</h3><p>服务器无法找到客户端指定的 Session。可能原因：</p>
+<ul>
+<li>Session ID 错误</li>
+<li>Session 已超时</li>
+<li>Session 已被 TEARDOWN</li>
+<li>Server 重启后会话状态丢失</li>
+</ul>
+<h3 id="461-Unsupported-Transport"><a href="#461-Unsupported-Transport" class="headerlink" title="461 Unsupported Transport"></a>461 Unsupported Transport</h3><p>服务器不支持客户端请求的 Transport 参数。例如客户端要求某种 UDP 传输方式，而服务器仅支持 TCP interleaved。</p>
+<h2 id="22-4-5xx"><a href="#22-4-5xx" class="headerlink" title="22.4 5xx"></a>22.4 5xx</h2><p>通常表示服务器内部处理失败。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token number">500</span> Internal Server Error
+<span class="token number">501</span> Not Implemented
+<span class="token number">503</span> Service Unavailable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="23-重要-RTSP-Header"><a href="#23-重要-RTSP-Header" class="headerlink" title="23. 重要 RTSP Header"></a>23. 重要 RTSP Header</h1><p>RTSP 报文中包含多个重要 Header。其中初学阶段应重点掌握以下字段：</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CSeq</td>
+<td>请求序号</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>RTSP 会话标识</td>
+</tr>
+<tr>
+<td>Transport</td>
+<td>媒体传输参数</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>消息体类型</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>消息体长度</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>客户端可接受的数据格式</td>
+</tr>
+<tr>
+<td>Public</td>
+<td>Server 支持的 RTSP 方法</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>媒体播放时间范围</td>
+</tr>
+<tr>
+<td>RTP-Info</td>
+<td>RTP 播放相关信息</td>
+</tr>
+</tbody></table>
+<p>前三个字段最关键 <code>CSeq</code> <code>Session</code> <code>Transport</code> 。可以分别理解为：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">CSeq → 当前请求
+Session → 当前会话
+Transport → 当前媒体传输方式<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="24-Content-Type-与-Content-Length"><a href="#24-Content-Type-与-Content-Length" class="headerlink" title="24. Content-Type 与 Content-Length"></a>24. Content-Type 与 Content-Length</h1><p>当 RTSP 消息包含消息体时，通常需要使用：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Content<span class="token operator">-</span>Type
+Content<span class="token operator">-</span>Length<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Content<span class="token operator">-</span>Type<span class="token operator">:</span> application<span class="token operator">/</span>sdp
+Content<span class="token operator">-</span>Length<span class="token operator">:</span> <span class="token number">186</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>表示：</p>
+<ul>
+<li>消息体类型为 SDP</li>
+<li>消息体长度为 186 字节</li>
+</ul>
+<p>随后才是具体 SDP 内容。这与常见文本协议的消息解析方式一致。</p>
+<h1 id="25-Range"><a href="#25-Range" class="headerlink" title="25. Range"></a>25. Range</h1><p>Range 用于表示媒体播放范围。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Range<span class="token operator">:</span> npt<span class="token operator">=</span><span class="token number">0</span><span class="token operator">-</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>其中 <code>npt</code> 表示 Normal Play Time。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Range<span class="token operator">:</span> npt<span class="token operator">=</span><span class="token number">10</span><span class="token operator">-</span><span class="token number">20</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可以表示请求播放媒体时间轴中的 $10s \sim 20s$ 范围。对于实时流和文件点播，其 Range 行为可能存在区别。</p>
+<h1 id="26-RTP-Info"><a href="#26-RTP-Info" class="headerlink" title="26. RTP-Info"></a>26. RTP-Info</h1><p>PLAY 成功后，服务器响应中可能包含 <code>RTP-Info</code> ，例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">RTP<span class="token operator">-</span>Info<span class="token operator">:</span> url<span class="token operator">=</span>rtsp<span class="token operator">:</span><span class="token comment">//example.com/media/track1;</span>
+seq<span class="token operator">=</span><span class="token number">45102</span><span class="token punctuation">;</span>
+rtptime<span class="token operator">=</span><span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>其中可能包括：</p>
+<ul>
+<li>RTP Stream URI</li>
+<li>初始 RTP Sequence Number</li>
+<li>RTP Timestamp</li>
+</ul>
+<p>客户端可以利用这些信息建立 RTSP 播放时间与 RTP 数据之间的对应关系。</p>
+<h1 id="27-多媒体轨道"><a href="#27-多媒体轨道" class="headerlink" title="27. 多媒体轨道"></a>27. 多媒体轨道</h1><p>一个媒体资源可能同时包含：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Video Track
+Audio Track<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>例如 SDP 中：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">m<span class="token operator">=</span>video <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+a<span class="token operator">=</span>control<span class="token operator">:</span>trackID<span class="token operator">=</span><span class="token number">0</span>
+
+m<span class="token operator">=</span>audio <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+a<span class="token operator">=</span>control<span class="token operator">:</span>trackID<span class="token operator">=</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此时客户端通常需要分别对不同媒体轨道执行 SETUP。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">SETUP <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>trackID<span class="token operator">=</span><span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>建立视频传输；随后：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">SETUP <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>trackID<span class="token operator">=</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>建立音频传输。两条轨道可以属于同一个 RTSP Session。</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_6.png?raw=true" alt="**多轨 RTSP Session**" style="zoom:38%;">
+
+<p>因此需要区分 <code>RTSP Session</code> 与 <code>RTP Stream</code> ，一个 <code>RTSP Session</code> 可以管理多个 <code>RTP Stream</code>。</p>
+<h1 id="28-Aggregate-Control-与-Media-Control"><a href="#28-Aggregate-Control-与-Media-Control" class="headerlink" title="28. Aggregate Control 与 Media Control"></a>28. Aggregate Control 与 Media Control</h1><p>RTSP 控制对象可能具有不同粒度。例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">rtsp<span class="token operator">:</span><span class="token comment">//example.com/movie</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可能代表整个媒体资源。而：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">rtsp<span class="token operator">:</span><span class="token comment">//example.com/movie/track1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可能代表其中一个视频轨道。因此某些请求针对 <code>Aggregate URI</code> 整个媒体会话；某些请求针对 <code>Media URI</code> 单独媒体轨道。具体控制方式通常由 SDP 中等字段共同决定。</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">a<span class="token operator">=</span>control<span class="token operator">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="29-Session-Timeout"><a href="#29-Session-Timeout" class="headerlink" title="29. Session Timeout"></a>29. Session Timeout</h1><p>RTSP Server 通常不会无限期保存一个没有活动的 Session。服务器可能在 Session 响应中返回超时参数，例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">Session<span class="token operator">:</span> <span class="token number">12345678</span><span class="token punctuation">;</span>timeout<span class="token operator">=</span><span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>表示 $Session Timeout = 60 s$ ；如果客户端长时间没有发送任何会话相关请求，服务器可能释放 Session。因此部分客户端会周期性发送：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">GET_PARAMETER<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或者其他允许的请求进行会话保活。</p>
+<h1 id="30-GET-PARAMETER"><a href="#30-GET-PARAMETER" class="headerlink" title="30. GET_PARAMETER"></a>30. GET_PARAMETER</h1><p>GET_PARAMETER 可以用于：</p>
+<ul>
+<li>查询服务器参数</li>
+<li>查询媒体参数</li>
+<li>作为 Session Keepalive 使用</li>
+</ul>
+<p>例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">GET_PARAMETER rtsp<span class="token operator">:</span><span class="token comment">//example.com/media RTSP/1.0</span>
+CSeq<span class="token operator">:</span> <span class="token number">8</span>
+Session<span class="token operator">:</span> <span class="token number">12345678</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>部分 RTSP 实现通过周期性发送该请求维持 Session 活跃状态。但具体保活方式取决于服务器实现。</p>
+<h1 id="31-RTSP-与底层-TCP-连接"><a href="#31-RTSP-与底层-TCP-连接" class="headerlink" title="31. RTSP 与底层 TCP 连接"></a>31. RTSP 与底层 TCP 连接</h1><p>RTSP/1.0 常通过 TCP 建立控制连接。例如：</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_7.png?raw=true" style="zoom:38%;">
+
+<p>在此 TCP 连接中传递 <code>OPTIONS</code> 、  <code>DESCRIBE</code> 、 <code>SETUP</code> 、 <code>PLAY</code> 、 <code>PAUSE</code> 、 <code>TEARDOWN</code> 等 RTSP 消息。但媒体数据是否使用同一 TCP 连接，需要根据 Transport 协商结果判断。</p>
+<h1 id="32-RTSP-控制连接与媒体连接"><a href="#32-RTSP-控制连接与媒体连接" class="headerlink" title="32. RTSP 控制连接与媒体连接"></a>32. RTSP 控制连接与媒体连接</h1><p>典型 UDP 模式中</p>
+<img src="https://github.com/NTGarfield/MyPic/blob/img/RTSP/2/RTSP2_8.png?raw=true" alt="**RTSP 控制连接与 RTP 媒体通道**" style="zoom:33%;">
+
+<p>此时 <code>RTSP</code> 与 <code>RTP</code> 使用的是不同网络通道。后续还会介绍另一种模式：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">RTP over RTSP/TCP<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>即 RTP 数据与 RTSP 控制消息共享同一 TCP 连接。该机制属于 RTSP Transport 的重要内容，将在后续传输模式章节展开。</p>
+<h1 id="33-完整-RTSP-会话示例"><a href="#33-完整-RTSP-会话示例" class="headerlink" title="33. 完整 RTSP 会话示例"></a>33. 完整 RTSP 会话示例</h1><p>下面给出一个简化的单视频流 RTSP 会话。</p>
+<h2 id="33-1-OPTIONS"><a href="#33-1-OPTIONS" class="headerlink" title="33.1 OPTIONS"></a>33.1 OPTIONS</h2><p>客户端：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">OPTIONS rtsp://example.com/media RTSP/1.0
+CSeq: 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>服务器：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">RTSP/1.0 200 OK
+CSeq: 1
+Public: OPTIONS, DESCRIBE, SETUP, PLAY, PAUSE, TEARDOWN<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="33-2-DESCRIBE"><a href="#33-2-DESCRIBE" class="headerlink" title="33.2 DESCRIBE"></a>33.2 DESCRIBE</h2><p>客户端：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">DESCRIBE rtsp://example.com/media RTSP/1.0
+CSeq: 2
+Accept: application/sdp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">RTSP/1.0 200 OK
+CSeq: 2
+Content-Type: application/sdp
+Content-Length: ...
+
+v=0
+...
+m=video 0 RTP/AVP 96
+a=rtpmap:96 H264/90000
+a=control:track1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="33-3-SETUP"><a href="#33-3-SETUP" class="headerlink" title="33.3 SETUP"></a>33.3 SETUP</h2><p>客户端：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">SETUP rtsp://example.com/media/track1 RTSP/1.0
+CSeq: 3
+Transport: RTP/AVP;unicast;client_port=5000-5001<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">RTSP/1.0 200 OK
+CSeq: 3
+Session: 12345678
+Transport: RTP/AVP;unicast;
+client_port=5000-5001;
+server_port=6000-6001<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="33-4-PLAY"><a href="#33-4-PLAY" class="headerlink" title="33.4 PLAY"></a>33.4 PLAY</h2><p>客户端：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">PLAY rtsp://example.com/media RTSP/1.0
+CSeq: 4
+Session: 12345678<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">RTSP/1.0 200 OK
+CSeq: 4
+Session: 12345678<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>随后：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">Server UDP 6000
+      │ RTP
+      ▼
+Client UDP 5000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="33-5-TEARDOWN"><a href="#33-5-TEARDOWN" class="headerlink" title="33.5 TEARDOWN"></a>33.5 TEARDOWN</h2><p>客户端：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">TEARDOWN rtsp://example.com/media RTSP/1.0
+CSeq: 5
+Session: 12345678<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">RTSP/1.0 200 OK
+CSeq: 5
+Session: 12345678<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>会话结束。</p>
+<h1 id="34-典型会话中的关键信息变化"><a href="#34-典型会话中的关键信息变化" class="headerlink" title="34. 典型会话中的关键信息变化"></a>34. 典型会话中的关键信息变化</h1><p>可以将整个流程归纳如下：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>主要目标</th>
+<th>关键字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OPTIONS</td>
+<td>查询能力</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>DESCRIBE</td>
+<td>获取媒体描述</td>
+<td>Content-Type、SDP</td>
+</tr>
+<tr>
+<td>SETUP</td>
+<td>建立媒体传输</td>
+<td>Transport、Session</td>
+</tr>
+<tr>
+<td>PLAY</td>
+<td>启动媒体发送</td>
+<td>Session、Range</td>
+</tr>
+<tr>
+<td>PAUSE</td>
+<td>暂停媒体</td>
+<td>Session</td>
+</tr>
+<tr>
+<td>TEARDOWN</td>
+<td>结束会话</td>
+<td>Session</td>
+</tr>
+</tbody></table>
+<p>逻辑关系为：</p>
+<pre class="line-numbers language-none"><code class="language-none">DESCRIBE → 明确媒体内容
+SETUP → 明确媒体如何传输
+PLAY → 启动媒体传输
+TEARDOWN → 释放媒体会话<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="35-RTSP-与-HTTP-的主要差异"><a href="#35-RTSP-与-HTTP-的主要差异" class="headerlink" title="35. RTSP 与 HTTP 的主要差异"></a>35. RTSP 与 HTTP 的主要差异</h1><p>RTSP 和 HTTP 在报文格式上较为相似，但协议目标不同。</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>HTTP</th>
+<th>RTSP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主要用途</td>
+<td>Web 资源传输</td>
+<td>实时媒体会话控制</td>
+</tr>
+<tr>
+<td>交互模型</td>
+<td>请求/响应</td>
+<td>请求/响应 + 会话状态</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>通常不依赖协议级会话状态</td>
+<td>核心机制</td>
+</tr>
+<tr>
+<td>播放控制</td>
+<td>非主要职责</td>
+<td>PLAY、PAUSE 等</td>
+</tr>
+<tr>
+<td>媒体传输</td>
+<td>通常由 HTTP 本身承载</td>
+<td>常由 RTP 等协议承载</td>
+</tr>
+<tr>
+<td>Transport 协商</td>
+<td>通常不涉及</td>
+<td>RTSP 核心机制之一</td>
+</tr>
+</tbody></table>
+<p>因此 RTSP 可以理解为一种：</p>
+<blockquote>
+<p>面向实时媒体资源的有状态控制协议。</p>
+</blockquote>
+<h1 id="36-常见理解误区"><a href="#36-常见理解误区" class="headerlink" title="36. 常见理解误区"></a>36. 常见理解误区</h1><h2 id="36-1-RTSP-连接建立后即开始发送视频"><a href="#36-1-RTSP-连接建立后即开始发送视频" class="headerlink" title="36.1 RTSP 连接建立后即开始发送视频"></a>36.1 RTSP 连接建立后即开始发送视频</h2><p>不成立。通常需要先执行：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">DESCRIBE
+SETUP
+PLAY<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>服务器才会开始发送媒体数据。</p>
+<h2 id="36-2-SETUP-等同于开始播放"><a href="#36-2-SETUP-等同于开始播放" class="headerlink" title="36.2 SETUP 等同于开始播放"></a>36.2 SETUP 等同于开始播放</h2><p>不成立。SETUP 主要用于建立：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">Transport
+Session
+RTP/RTCP 参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>PLAY 才负责启动媒体发送。</p>
+<h2 id="36-3-Session-等同于-TCP-连接"><a href="#36-3-Session-等同于-TCP-连接" class="headerlink" title="36.3 Session 等同于 TCP 连接"></a>36.3 Session 等同于 TCP 连接</h2><p>不成立。<code>TCP Connection</code> 属于传输层；<code>RTSP Session</code> 属于应用层。</p>
+<h2 id="36-4-一个-RTSP-Session-只能对应一个-RTP-Stream"><a href="#36-4-一个-RTSP-Session-只能对应一个-RTP-Stream" class="headerlink" title="36.4 一个 RTSP Session 只能对应一个 RTP Stream"></a>36.4 一个 RTSP Session 只能对应一个 RTP Stream</h2><p>不成立。同一个媒体资源可能包括：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">Video
+Audio
+Subtitle<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>多个媒体轨道。一个 RTSP Session 可以管理多个媒体 Stream。</p>
+<h2 id="36-5-RTSP-负责视频编码"><a href="#36-5-RTSP-负责视频编码" class="headerlink" title="36.5 RTSP 负责视频编码"></a>36.5 RTSP 负责视频编码</h2><p>不成立。RTSP 并不负责 H.264、H.265 等视频编码。编码属于媒体编码层：</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">Raw Video
+    ↓
+H.264 / H.265<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>RTSP 只负责相关媒体会话控制。</p>
+<h1 id="37-本文知识结构总结"><a href="#37-本文知识结构总结" class="headerlink" title="37. 本文知识结构总结"></a>37. 本文知识结构总结</h1><p>本篇需要重点掌握以下关系：</p>
+<pre class="line-numbers language-none"><code class="language-none">RTSP Client
+      │ Request
+      ▼
+RTSP Server<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>请求通过 <code>CSeq</code> 进行顺序匹配</li>
+<li>服务器通过 <code>Session</code> 维护媒体会话</li>
+<li>双方通过 <code>Transport</code> 协商媒体数据传输方式</li>
+</ul>
+<p>完整流程可概括为：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">OPTIONS → 查询服务器能力
+DESCRIBE → 获取 SDP
+SETUP → 协商 Transport → 创建 Session
+PLAY → 开始媒体传输
+PAUSE → 暂停媒体传输
+TEARDOWN → 释放 Session<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>其中最重要的三个 RTSP Header 为：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">CSeq
+Session
+Transport<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>理解这三个字段后，RTSP 报文结构和会话逻辑基本能够建立完整框架。</p>
+<h1 id="38-参考标准"><a href="#38-参考标准" class="headerlink" title="38. 参考标准"></a>38. 参考标准</h1><ul>
+<li>RFC 2326 — Real Time Streaming Protocol (RTSP 1.0)</li>
+<li>RFC 7826 — Real-Time Streaming Protocol Version 2.0</li>
+<li>RFC 3550 — RTP: A Transport Protocol for Real-Time Applications</li>
+<li>RFC 4566 — SDP: Session Description Protocol</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">NTGafield</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://NTGarfield.github.io/2026/11/27/rtsp-bi-ji-er-rtsp-xie-yi-ji-chu-yu-hui-hua-ji-zhi/">https://NTGarfield.github.io/2026/11/27/rtsp-bi-ji-er-rtsp-xie-yi-ji-chu-yu-hui-hua-ji-zhi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">NTGafield</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/11/27/rtsp-bi-ji-er-rtsp-xie-yi-ji-chu-yu-hui-hua-ji-zhi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="RTSP 笔记（二）：RTSP 协议基础与会话机制">
+                        
+                        <span class="card-title">RTSP 笔记（二）：RTSP 协议基础与会话机制</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-11-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            NTGafield
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/11/24/rtsp-bi-ji-yi-ji-suan-ji-wang-luo-ji-chu-yu-liu-mei-ti-xie-yi-ti-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="RTSP 笔记（一）：计算机网络基础与流媒体协议体系">
+                        
+                        <span class="card-title">RTSP 笔记（一）：计算机网络基础与流媒体协议体系</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机网络基础与流媒体协议体系
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-11-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    计算机网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/RTSP/">
+                        <span class="chip bg-color">RTSP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: NTGafield<br />'
+            + '文章作者: NTGafield<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="402328846"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2025-2026</span>
+            
+            <a href="/about" target="_blank">NTGafield</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">25.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/NTGarfield" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2965596765@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=296596765" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 296596765" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+
+    <!-- Prism.js 脚本 -->
+<script src="/libs/prism/prism.js"></script>
+<script>Prism.highlightAll();</script>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
